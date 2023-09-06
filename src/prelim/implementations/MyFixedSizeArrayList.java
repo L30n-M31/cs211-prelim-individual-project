@@ -18,10 +18,10 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     private MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
 
     public MyFixedSizeArrayList() {
-        product = null;
-        modelNumber = null;
-        color = null;
-        weight = null;
+        product = "";
+        modelNumber = "";
+        color = "";
+        weight = "";
     } // end of default constructor
 
     public MyFixedSizeArrayList(String p, String m, String c, String w) {
@@ -39,8 +39,12 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         return modelNumber;
     }
 
-    public MyFixedSizeArrayList[] getArray() {
-        return array;
+    public String getColor() {
+        return color;
+    }
+
+    public String getWeight() {
+        return weight;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public void insert(MyFixedSizeArrayList data) throws ListOverflowException {
         int i = 0;
         for (int index = 0; index < array.length; index++) {
-            if (array[index] == null) {
+            if (array[index] == null || array[index].getProduct().equals("")) {
                 i = index;
                 break;
             }
@@ -73,8 +77,10 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public boolean delete(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(data)) {
-                array[i] = null;
+            if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
+                    array[i].getModelNumber().equalsIgnoreCase(data.getModelNumber())) {
+                array[i] = new MyFixedSizeArrayList();
+                //array[i] = new MyFixedSizeArrayList("", "", "", "");
                 return true;
             }
         }
@@ -84,8 +90,10 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public int search(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(data))
+            if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
+                    array[i].getModelNumber().equalsIgnoreCase(data.getModelNumber())) {
                 return i;
+            }
         }
         return -1;
     } // end of search method
@@ -95,7 +103,14 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
      */
     public void showArray() {
         for (MyFixedSizeArrayList element : array) {
-            System.out.println(element);
+            if (element != null) {
+                if (element.getProduct().equalsIgnoreCase(""))
+                    System.out.println("empty");
+                else
+                    System.out.println(element.getProduct() + ", " + element.getModelNumber() + ", " + element.getColor() +
+                            ", " + element.getWeight());
+            } else
+                System.out.println("empty");
         }
-    }
+    } // end of showArray method
 } // end of MyFixedSizeArrayList class
