@@ -16,7 +16,6 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     private String color;
     private String weight;
     private MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
-    private int index = 0;
 
     public MyFixedSizeArrayList() {
         product = null;
@@ -32,6 +31,18 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         weight = w;
     } // end of constructor
 
+    public String getProduct() {
+        return product;
+    }
+
+    public String getModelNumber() {
+        return modelNumber;
+    }
+
+    public MyFixedSizeArrayList[] getArray() {
+        return array;
+    }
+
     @Override
     public int getSize() {
         return array.length;
@@ -39,8 +50,15 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
 
     @Override
     public void insert(MyFixedSizeArrayList data) throws ListOverflowException {
-        array[index] = data;
-        index++;
+        int i = 0;
+        for (int index = 0; index < array.length; index++) {
+            if (array[index] == null) {
+                i = index;
+                break;
+            }
+            i++;
+        }
+        array[i] = data;
     } // end of insert method
 
     @Override
@@ -71,4 +89,13 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         }
         return -1;
     } // end of search method
+
+    /*
+     * Just to test if the methods are working
+     */
+    public void showArray() {
+        for (MyFixedSizeArrayList element : array) {
+            System.out.println(element);
+        }
+    }
 } // end of MyFixedSizeArrayList class
