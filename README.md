@@ -21,7 +21,8 @@ This project contains my implementation of a linked list collection as part of m
 * __Enhanced Understanding:__ Gain a comprehensive understanding of linked lists by exploring various implementations
 
 ## Task Checklist
-- [ ] `MyList.java` : Interface definition
+- [x] `MyList.java` : Interface definition
+- [ ] `ListOverflowException` : User-defined custom exception
 - [ ] `MyFixedSizeArrayList.java` : Implementation using fixed-size array
 - [ ] `MyGrowingArrayList.java` : Implementation using a growing array
 - [ ] `MySinglyLinkedList.java` : Implementation using singly-linked nodes
