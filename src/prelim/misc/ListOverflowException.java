@@ -1,4 +1,6 @@
 package prelim.misc;
 
-public class ListOverflowException {
+import java.lang.Throwable;
+
+public class ListOverflowException extends Throwable {
 }
