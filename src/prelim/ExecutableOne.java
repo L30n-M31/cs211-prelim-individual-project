@@ -54,24 +54,17 @@ public class ExecutableOne {
 
             System.out.print("Do you want to add another product? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
+        list.showArray(); // Just to test if the method is working
     } // end of addProducts method
 
     public void deleteProducts() {
         String product, modelNumber;
-        int index;
 
         product = readString("Enter product: ");
         modelNumber = readString("Enter model number: ");
 
-        MyFixedSizeArrayList[] array = list.getArray();
-        MyFixedSizeArrayList element = null;
-
-        for (index = 0; index < array.length; index++) {
-            if (product.equalsIgnoreCase(array[index].getProduct()) && modelNumber.equalsIgnoreCase(array[index].getModelNumber())) {
-                element = list.getElement(array[index]);
-            }
-        }
-        Boolean.parseBoolean(list.delete(element) ? "Data has been deleted" : "Data has not been deleted");
+        MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, modelNumber, "", "");
+        Boolean.parseBoolean(list.delete(element) ? "- Data has been deleted" : "- Data has not been deleted");
         list.showArray(); // Just to test if the method is working
     } // end of deleteProducts method
 
