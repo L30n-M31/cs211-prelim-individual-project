@@ -33,6 +33,8 @@ public class ExecutableOne {
                 case 2 -> deleteProducts();
             }
         }
+        System.out.println("Exiting...");
+        System.exit(0);
     } // end of run method
 
     public void addProducts() throws ListOverflowException{
