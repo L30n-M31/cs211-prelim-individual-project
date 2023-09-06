@@ -18,6 +18,13 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     private MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
     private int index = 0;
 
+    public MyFixedSizeArrayList() {
+        product = null;
+        modelNumber = null;
+        color = null;
+        weight = null;
+    } // end of default constructor
+
     public MyFixedSizeArrayList(String p, String m, String c, String w) {
         product = p;
         modelNumber = m;
