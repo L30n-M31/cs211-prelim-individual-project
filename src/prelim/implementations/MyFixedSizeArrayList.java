@@ -22,10 +22,4 @@ public class MyFixedSizeArrayList {
         color = c;
         weight = w;
     } // end of constructor
-
-    public void createObject(String p, String m, String c, String w) throws ListOverflowException {
-        element = new MyFixedSizeArrayList(p, m, c, w);
-        array[index] = element;
-        index++;
-    } // end of createObject method
 } // end of MyFixedSizeArrayList class
