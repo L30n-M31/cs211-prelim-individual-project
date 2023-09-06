@@ -1,5 +1,5 @@
 /**
- * @author: Leonhard Leung
+ * @author Leonhard Leung
  * Date: 09/06/2023
  */
 
