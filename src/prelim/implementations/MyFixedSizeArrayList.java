@@ -19,11 +19,11 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     private MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
 
     public MyFixedSizeArrayList() {
-        product = "";
-        brand = "";
-        serialNumber = "";
-        color = "";
-        weight = "";
+        product = null;
+        brand = null;
+        serialNumber = null;
+        color = null;
+        weight = null;
     } // end of default constructor
 
     public MyFixedSizeArrayList(String p, String b, String s, String c, String w) {
@@ -87,7 +87,6 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
                     array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
                 array[i] = new MyFixedSizeArrayList();
-                //array[i] = new MyFixedSizeArrayList("", "", "", "");
                 return true;
             }
         }
