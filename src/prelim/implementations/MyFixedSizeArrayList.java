@@ -115,7 +115,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
                     System.out.println("empty");
                 else
                     System.out.println(element.getProduct() + ", " + element.getBrand() + ", " +
-                            element.getSerialNumber() + element.getColor() + ", " + element.getWeight());
+                            element.getSerialNumber() + ", " + element.getColor() + ", " + element.getWeight());
             } else
                 System.out.println("empty");
         }
