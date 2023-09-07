@@ -86,7 +86,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         for (int i = 0; i < array.length; i++) {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
                     array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
-                array[i] = new MyFixedSizeArrayList();
+                array[i] = null;
                 return true;
             }
         }
