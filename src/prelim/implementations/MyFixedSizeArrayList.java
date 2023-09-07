@@ -118,6 +118,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
      * Just to test if the methods are working
      */
     public void showArray() {
+        System.out.println("\nCurrent List:");
         for (MyFixedSizeArrayList element : array) {
             if (element != null) {
                 System.out.println(element.getProduct() + ", " + element.getBrand() + ", " +
