@@ -110,11 +110,8 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public void showArray() {
         for (MyFixedSizeArrayList element : array) {
             if (element != null) {
-                if (element.getProduct().equalsIgnoreCase(""))
-                    System.out.println("empty");
-                else
-                    System.out.println(element.getProduct() + ", " + element.getBrand() + ", " +
-                            element.getSerialNumber() + ", " + element.getColor() + ", " + element.getWeight());
+                System.out.println(element.getProduct() + ", " + element.getBrand() + ", " +
+                        element.getSerialNumber() + ", " + element.getColor() + ", " + element.getWeight());
             } else
                 System.out.println("empty");
         }
