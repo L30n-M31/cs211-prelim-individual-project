@@ -121,14 +121,20 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     /*
      * Just to test if the methods are working
      */
-    public void showArray() {
-        System.out.println("\nCurrent List:");
+    public void showList() {
+        System.out.println("\n--------------------------------------------------------------------");
+        System.out.println("                           Current List                             ");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("%-15s%-13s%-17s%-10s%-13s%n", "Product", "Brand", "Series No.", "Color", "Weight (g)");
+        System.out.printf("%-15s%-13s%-17s%-10s%-10s%n", "============", "==========", "==============",
+                "=======", "=============");
         for (MyFixedSizeArrayList element : array) {
             if (element != null) {
-                System.out.println(element.getProduct() + ", " + element.getBrand() + ", " +
-                        element.getSerialNumber() + ", " + element.getColor() + ", " + element.getWeight());
+                System.out.printf("%-15s%-13s%-17s%-10s%-10s%n", element.getProduct(), element.getBrand(),
+                        element.getSerialNumber(), element.getColor(), element.getWeight());
             } else
-                System.out.println("empty");
+                System.out.printf("%-15s%-13s%-17s%-10s%-10s%n", "N/A", "N/A", "N/A", "N/A", "N/A");
         }
-    } // end of showArray method
+        System.out.println("--------------------------------------------------------------------\n");
+    } // end of showList method
 } // end of MyFixedSizeArrayList class
