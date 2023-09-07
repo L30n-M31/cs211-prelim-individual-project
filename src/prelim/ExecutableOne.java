@@ -27,28 +27,30 @@ public class ExecutableOne {
 
     public void run() throws ListOverflowException, NoSuchElementException {
         int selection = 0;
-        while (selection != 4) {
+        while (selection != 5) {
             menu();
             selection = Integer.parseInt(readString("Enter among the choices above: "));
             switch (selection) {
                 case 1 -> addProducts();
                 case 2 -> deleteProducts();
                 case 3 -> locateProduct();
+                case 4 -> list.showList();
             }
         }
-        System.out.println("Exiting...");
+        System.out.println("\nExiting...");
         System.exit(0);
     } // end of run method
 
     public void addProducts() throws ListOverflowException{
         String product, brand, serialNumber, color, weight;
 
+        System.out.println("\nADD A PRODUCT");
         do {
-            product = readString("\nProduct: ");
-            brand = readString("Brand: ");
-            serialNumber = readString("Serial Number: ");
-            color = readString("Color: ");
-            weight = readString("Weight: ");
+            product = readString(">>> Product: ");
+            brand = readString(">>> Brand: ");
+            serialNumber = readString(">>> Serial Number: ");
+            color = readString(">>> Color: ");
+            weight = readString(">>> Weight: ");
 
             try {
                 list.insert(new MyFixedSizeArrayList(product, brand, serialNumber, color, weight));
@@ -58,45 +60,47 @@ public class ExecutableOne {
 
             System.out.print("\nDo you want to add another product? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-        list.showArray(); // Just to test if the method is working
     } // end of addProducts method
 
     public void deleteProducts() throws NoSuchElementException {
+        list.showList();
         String product, brand, serialNumber;
 
-        product = readString("Enter product: ");
-        brand = readString("Enter brand: ");
-        serialNumber = readString("Enter serial number: ");
+        System.out.println("DELETE A PRODUCT");
+        product = readString(">>> Enter product: ");
+        brand = readString(">>> Enter brand: ");
+        serialNumber = readString(">>> Enter serial number: ");
 
         MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, serialNumber));
-        System.out.println(list.delete(element) ? "- Data has been deleted" : "- Data has not been deleted");
-        list.showArray(); // Just to test if the method is working
+        System.out.println(list.delete(element) ? "\n- Data has been deleted" : "\n- Data has not been deleted");
     } // end of deleteProducts method
 
     public void locateProduct() {
         String product, brand, serialNumber;
 
-        product = readString("Enter product: ");
-        brand = readString("Enter brand: ");
-        serialNumber = readString("Enter serial number: ");
+        System.out.println("\nLOCATE PRODUCT");
+        product = readString(">>> Enter product: ");
+        brand = readString(">>> Enter brand: ");
+        serialNumber = readString(">>> Enter serial number: ");
 
         MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, brand, serialNumber);
         int index = list.search(element);
         if (index != -1)
-            System.out.println("\nThe product is number " + (index + 1) + " in the list\n");
+            System.out.println("\n- The product is number " + (index + 1) + " in the list");
         else
-            System.out.println("\nThe product is not included in the list\n");
+            System.out.println("\n- The product is not included in the list");
     } // end of locateProduct method
 
     public void menu() {
-        System.out.println("===================================");
-        System.out.println("              MAIN MENU            ");
-        System.out.println("   -----------------------------   ");
-        System.out.println("    1. Add product to list         ");
-        System.out.println("    2. Delete product from list    ");
-        System.out.println("    3. Locate product from list    ");
-        System.out.println("    4. Exit program                ");
-        System.out.println("===================================");
+        System.out.println("=======================================");
+        System.out.println("|              MAIN MENU              |");
+        System.out.println("|   -------------------------------   |");
+        System.out.println("|     1. Add product to list          |");
+        System.out.println("|     2. Delete product from list     |");
+        System.out.println("|     3. Locate product from list     |");
+        System.out.println("|     4. View list                    |");
+        System.out.println("|     5. Exit program                 |");
+        System.out.println("=======================================");
     } // end of menu method
 
     public String readString(String promptMessage) {
