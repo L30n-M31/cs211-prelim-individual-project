@@ -85,7 +85,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public boolean delete(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
-                    array[i].getModelNumber().equalsIgnoreCase(data.getModelNumber())) {
+                    array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
                 array[i] = new MyFixedSizeArrayList();
                 //array[i] = new MyFixedSizeArrayList("", "", "", "");
                 return true;
@@ -98,7 +98,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public int search(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
-                    array[i].getModelNumber().equalsIgnoreCase(data.getModelNumber())) {
+                    array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
                 return i;
             }
         }
@@ -114,8 +114,8 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
                 if (element.getProduct().equalsIgnoreCase(""))
                     System.out.println("empty");
                 else
-                    System.out.println(element.getProduct() + ", " + element.getModelNumber() + ", " + element.getColor() +
-                            ", " + element.getWeight());
+                    System.out.println(element.getProduct() + ", " + element.getBrand() + ", " +
+                            element.getSerialNumber() + element.getColor() + ", " + element.getWeight());
             } else
                 System.out.println("empty");
         }
