@@ -33,6 +33,7 @@ public class ExecutableOne {
             switch (selection) {
                 case 1 -> addProducts();
                 case 2 -> deleteProducts();
+                case 3 -> locateProduct();
             }
         }
         System.out.println("Exiting...");
@@ -72,13 +73,28 @@ public class ExecutableOne {
         list.showArray(); // Just to test if the method is working
     } // end of deleteProducts method
 
+    public void locateProduct() {
+        String product, brand, serialNumber;
+
+        product = readString("Enter product: ");
+        brand = readString("Enter brand: ");
+        serialNumber = readString("Enter serial number: ");
+
+        MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, brand, serialNumber);
+        int index = list.search(element);
+        if (index != -1)
+            System.out.println("\nThe product is number " + (index + 1) + " in the list\n");
+        else
+            System.out.println("\nThe product is not included in the list\n");
+    } // end of locateProduct method
+
     public void menu() {
         System.out.println("===================================");
         System.out.println("              MAIN MENU            ");
         System.out.println("   -----------------------------   ");
         System.out.println("    1. Add product to list         ");
         System.out.println("    2. Delete product from list    ");
-        System.out.println("    3. Search product from list    ");
+        System.out.println("    3. Locate product from list    ");
         System.out.println("    4. Exit program                ");
         System.out.println("===================================");
     } // end of menu method
