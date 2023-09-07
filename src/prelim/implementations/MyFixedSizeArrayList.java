@@ -34,6 +34,12 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         weight = w;
     } // end of constructor
 
+    public MyFixedSizeArrayList(String p, String b, String s) {
+        product = p;
+        brand = b;
+        serialNumber = s;
+    } // end of constructor
+
     public String getProduct() {
         return product;
     }
