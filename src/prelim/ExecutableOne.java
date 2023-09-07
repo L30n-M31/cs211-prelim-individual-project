@@ -11,8 +11,8 @@ import prelim.misc.ListOverflowException;
 import java.util.Scanner;
 
 public class ExecutableOne {
-    private Scanner keyboard = new Scanner(System.in);
-    private MyFixedSizeArrayList list = new MyFixedSizeArrayList();
+    private final Scanner keyboard = new Scanner(System.in);
+    private final MyFixedSizeArrayList list = new MyFixedSizeArrayList();
     public static void main(String[] args) {
         ExecutableOne execute = new ExecutableOne();
         try {
@@ -65,7 +65,7 @@ public class ExecutableOne {
         brand = readString("Enter brand: ");
         serialNumber = readString("Enter serial number: ");
 
-        MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, brand, serialNumber, "", "");
+        MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, serialNumber));
         Boolean.parseBoolean(list.delete(element) ? "- Data has been deleted" : "- Data has not been deleted");
         list.showArray(); // Just to test if the method is working
     } // end of deleteProducts method
