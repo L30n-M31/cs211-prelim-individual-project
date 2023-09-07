@@ -12,21 +12,24 @@ import java.util.NoSuchElementException;
 
 public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     private String product;
-    private String modelNumber;
+    private String brand;
+    private String serialNumber;
     private String color;
     private String weight;
     private MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
 
     public MyFixedSizeArrayList() {
         product = "";
-        modelNumber = "";
+        brand = "";
+        serialNumber = "";
         color = "";
         weight = "";
     } // end of default constructor
 
-    public MyFixedSizeArrayList(String p, String m, String c, String w) {
+    public MyFixedSizeArrayList(String p, String b, String s, String c, String w) {
         product = p;
-        modelNumber = m;
+        brand = b;
+        serialNumber = s;
         color = c;
         weight = w;
     } // end of constructor
@@ -35,8 +38,12 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         return product;
     }
 
-    public String getModelNumber() {
-        return modelNumber;
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
     }
 
     public String getColor() {
