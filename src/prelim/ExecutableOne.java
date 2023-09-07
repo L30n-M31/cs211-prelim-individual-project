@@ -8,6 +8,7 @@ package prelim;
 import prelim.implementations.MyFixedSizeArrayList;
 import prelim.misc.ListOverflowException;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ExecutableOne {
@@ -17,14 +18,15 @@ public class ExecutableOne {
         ExecutableOne execute = new ExecutableOne();
         try {
             execute.run();
-        } catch (ListOverflowException e) {
-            e.sendMessage();
+        } catch (ListOverflowException e1) {
+            e1.sendMessage();
+        } catch (NoSuchElementException e2) {
+            System.out.println("- element is not included in the list");
         }
     } // end of main method
 
-    public void run() throws ListOverflowException {
+    public void run() throws ListOverflowException, NoSuchElementException {
         int selection = 0;
-
         while (selection != 4) {
             menu();
             selection = Integer.parseInt(readString("Enter among the choices above: "));
@@ -41,7 +43,7 @@ public class ExecutableOne {
         String product, brand, serialNumber, color, weight;
 
         do {
-            product = readString("Product: ");
+            product = readString("\nProduct: ");
             brand = readString("Brand: ");
             serialNumber = readString("Serial Number: ");
             color = readString("Color: ");
@@ -53,12 +55,12 @@ public class ExecutableOne {
                 throw new ListOverflowException();
             }
 
-            System.out.print("Do you want to add another product? <y/n>: ");
+            System.out.print("\nDo you want to add another product? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
         list.showArray(); // Just to test if the method is working
     } // end of addProducts method
 
-    public void deleteProducts() {
+    public void deleteProducts() throws NoSuchElementException {
         String product, brand, serialNumber;
 
         product = readString("Enter product: ");
@@ -66,7 +68,7 @@ public class ExecutableOne {
         serialNumber = readString("Enter serial number: ");
 
         MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, serialNumber));
-        Boolean.parseBoolean(list.delete(element) ? "- Data has been deleted" : "- Data has not been deleted");
+        System.out.println(list.delete(element) ? "- Data has been deleted" : "- Data has not been deleted");
         list.showArray(); // Just to test if the method is working
     } // end of deleteProducts method
 
@@ -85,4 +87,4 @@ public class ExecutableOne {
         System.out.print(promptMessage);
         return keyboard.nextLine();
     } // end of readString method
-}
+} // end of ExecutableOne class
