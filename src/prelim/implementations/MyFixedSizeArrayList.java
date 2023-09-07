@@ -95,6 +95,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public boolean delete(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
+                    array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
                     array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
                 array[i] = null;
                 return true;
@@ -107,6 +108,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public int search(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
+                    array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
                     array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
                 return i;
             }
