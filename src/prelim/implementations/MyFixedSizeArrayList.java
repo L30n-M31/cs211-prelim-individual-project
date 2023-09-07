@@ -107,10 +107,12 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public int search(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
-            if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
-                    array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
-                    array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
-                return i;
+            if (array[i] != null) {
+                if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
+                        array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
+                        array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
+                    return i;
+                }
             }
         }
         return -1;
