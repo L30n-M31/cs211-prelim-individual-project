@@ -38,16 +38,17 @@ public class ExecutableOne {
     } // end of run method
 
     public void addProducts() throws ListOverflowException{
-        String product, modelNumber, color, weight;
+        String product, brand, serialNumber, color, weight;
 
         do {
             product = readString("Product: ");
-            modelNumber = readString("Model Number: ");
+            brand = readString("Brand: ");
+            serialNumber = readString("Serial Number: ");
             color = readString("Color: ");
             weight = readString("Weight: ");
 
             try {
-                list.insert(new MyFixedSizeArrayList(product, modelNumber, color, weight));
+                list.insert(new MyFixedSizeArrayList(product, brand, serialNumber, color, weight));
             } catch (Exception e) {
                 throw new ListOverflowException();
             }
