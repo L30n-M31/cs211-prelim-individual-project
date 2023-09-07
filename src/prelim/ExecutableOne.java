@@ -59,12 +59,13 @@ public class ExecutableOne {
     } // end of addProducts method
 
     public void deleteProducts() {
-        String product, serialNumber;
+        String product, brand, serialNumber;
 
         product = readString("Enter product: ");
+        brand = readString("Enter brand: ");
         serialNumber = readString("Enter serial number: ");
 
-        MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, "", serialNumber, "", "");
+        MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, brand, serialNumber, "", "");
         Boolean.parseBoolean(list.delete(element) ? "- Data has been deleted" : "- Data has not been deleted");
         list.showArray(); // Just to test if the method is working
     } // end of deleteProducts method
