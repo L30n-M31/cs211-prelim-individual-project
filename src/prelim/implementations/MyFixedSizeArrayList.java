@@ -75,8 +75,12 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public MyFixedSizeArrayList getElement(MyFixedSizeArrayList data) throws NoSuchElementException {
         for (MyFixedSizeArrayList element : array) {
-            if (element.equals(data))
-                return element;
+            if (element != null) {
+                if (element.getProduct().equalsIgnoreCase(data.getProduct()) &&
+                        element.getBrand().equalsIgnoreCase(data.getBrand()) &&
+                        element.getSerialNumber().equalsIgnoreCase(data.getSerialNumber()))
+                    return element;
+            }
         }
         return null;
     } // end of getElement method
