@@ -63,7 +63,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     public void insert(MyFixedSizeArrayList data) throws ListOverflowException {
         int i = 0;
         for (int index = 0; index < array.length; index++) {
-            if (array[index] == null || array[index].getProduct().equals("")) {
+            if (array[index] == null) {
                 i = index;
                 break;
             }
