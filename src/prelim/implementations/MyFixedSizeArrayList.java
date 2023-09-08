@@ -11,12 +11,12 @@ import prelim.misc.MyList;
 import java.util.NoSuchElementException;
 
 public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
-    private String product;
-    private String brand;
-    private String serialNumber;
+    private final String product;
+    private final String brand;
+    private final String serialNumber;
     private String color;
     private String weight;
-    private MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
+    private final MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
 
     public MyFixedSizeArrayList() {
         product = null;
