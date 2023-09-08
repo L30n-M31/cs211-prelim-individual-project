@@ -5,7 +5,6 @@
 
 package prelim.implementations;
 
-import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
 import java.util.NoSuchElementException;
@@ -66,7 +65,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     } // end of getSize method
 
     @Override
-    public void insert(MyFixedSizeArrayList data) throws ListOverflowException {
+    public void insert(MyFixedSizeArrayList data) {
         int i = 0;
         for (int index = 0; index < array.length; index++) {
             if (array[index] == null) {
@@ -94,6 +93,13 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public boolean delete(MyFixedSizeArrayList data) {
         for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(data)) {
+                array[i] = null;
+                return true;
+            }
+        }
+        /*
+        for (int i = 0; i < array.length; i++) {
             if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
                     array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
                     array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
@@ -101,6 +107,8 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
                 return true;
             }
         }
+
+         */
         return false;
     } // end of delete method
 
