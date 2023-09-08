@@ -5,6 +5,7 @@
 
 package prelim.implementations;
 
+import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
 import java.util.NoSuchElementException;
@@ -98,17 +99,6 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
                 return true;
             }
         }
-        /*
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
-                    array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
-                    array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
-                array[i] = null;
-                return true;
-            }
-        }
-
-         */
         return false;
     } // end of delete method
 
