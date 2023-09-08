@@ -11,11 +11,11 @@ import prelim.misc.ListOverflowException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ExecutableOne {
+public class MyFixedSizeArrayListExecutable {
     private final Scanner keyboard = new Scanner(System.in);
     private final MyFixedSizeArrayList list = new MyFixedSizeArrayList();
     public static void main(String[] args) {
-        ExecutableOne execute = new ExecutableOne();
+        MyFixedSizeArrayListExecutable execute = new MyFixedSizeArrayListExecutable();
         try {
             execute.run();
         } catch (ListOverflowException e1) {
