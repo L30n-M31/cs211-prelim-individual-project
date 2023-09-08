@@ -10,4 +10,26 @@ public class MyGrowingArrayList {
         dateAssigned = null;
         dateSubmitted = null;
     } // end of default constructor
+
+    public MyGrowingArrayList(String pN, String dA, String dS) {
+        projectName = pN;
+        dateAssigned = dA;
+        dateSubmitted = dS;
+    } // end of constructor
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public String getDateAssigned() {
+        return dateAssigned;
+    }
+
+    public String getDateSubmitted() {
+        return dateSubmitted;
+    }
+
+
+
+
 }
