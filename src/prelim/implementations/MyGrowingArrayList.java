@@ -1,6 +1,12 @@
 package prelim.implementations;
 
-public class MyGrowingArrayList {
+import prelim.MyGrowingArrayListExecutable;
+import prelim.misc.ListOverflowException;
+import prelim.misc.MyList;
+
+import java.util.NoSuchElementException;
+
+public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
     private String projectName;
     private String dateAssigned;
     private String dateSubmitted;
@@ -30,6 +36,28 @@ public class MyGrowingArrayList {
     }
 
 
+    @Override
+    public int getSize() {
+        return 0;
+    }
 
+    @Override
+    public void insert(MyGrowingArrayList data) throws ListOverflowException {
 
+    }
+
+    @Override
+    public MyGrowingArrayList getElement(MyGrowingArrayList data) throws NoSuchElementException {
+        return null;
+    }
+
+    @Override
+    public boolean delete(MyGrowingArrayList data) {
+        return false;
+    }
+
+    @Override
+    public int search(MyGrowingArrayList data) {
+        return 0;
+    }
 }
