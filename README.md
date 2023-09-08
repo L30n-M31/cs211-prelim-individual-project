@@ -23,14 +23,14 @@ This project contains my implementation of a linked list collection as part of m
 ## Task Checklist
 - [x] `MyList.java` : Interface definition
 - [ ] `ListOverflowException` : User-defined custom exception
-- [ ] `MyFixedSizeArrayList.java` : Implementation using fixed-size array
-- [ ] `MyGrowingArrayList.java` : Implementation using a growing array
+- [x] `MyFixedSizeArrayList.java` : Implementation using fixed-size array
+- [x] `MyGrowingArrayList.java` : Implementation using a growing array
 - [ ] `MySinglyLinkedList.java` : Implementation using singly-linked nodes
 - [ ] `MyDoubleLinkedList.java` : Implementation using doubly-linked nodes
 - [ ] `MySinglyLinkedCircularList.java` : Implementation using singly-linked circular nodes
 - [ ] `MyDoublyLinkedCircularList.java` : Implementation using double-linked circular nodes
-- [ ] `ExecutableOne.java` : Executable for number one
-- [ ] `ExecutableTwo.java` : Executable for number two
+- [x] `MyFixedSizeArrayListExecutable.java` : Executable for number one
+- [x] `MyGrowingArrayListExecutable.java` : Executable for number two
 - [ ] `ExecutableThree.java` : Executable for number three
 - [ ] `ExecutableFour.java` : Executable for number four
 - [ ] `ExecutableFive.java` : Executable for number five
