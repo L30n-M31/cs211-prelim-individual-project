@@ -1,6 +1,10 @@
+/**
+ * @author Leonhard Leung
+ * Date: 09/08/2023
+ */
+
 package prelim.implementations;
 
-import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
 import java.util.NoSuchElementException;
