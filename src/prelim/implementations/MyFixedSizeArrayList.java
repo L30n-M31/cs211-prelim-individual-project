@@ -5,7 +5,6 @@
 
 package prelim.implementations;
 
-import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
 import java.util.NoSuchElementException;
