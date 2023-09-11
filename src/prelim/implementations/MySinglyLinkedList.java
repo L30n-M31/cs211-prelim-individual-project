@@ -15,6 +15,11 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     private T data;
     private MySinglyLinkedList<T> next;
 
+    public MySinglyLinkedList() {
+        data = null;
+        next = null;
+    }
+
     public MySinglyLinkedList(T data) {
         this.data = data;
         next = null;
@@ -39,8 +44,10 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public void insert(T data) throws ListOverflowException {
-
-    }
+        MySinglyLinkedList<T> newNode = new MySinglyLinkedList<T>(data);
+        newNode.next = next;
+        next = newNode;
+    } // end of insert method
 
     @Override
     public T getElement(T data) throws NoSuchElementException {
@@ -55,5 +62,13 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     @Override
     public int search(T data) {
         return 0;
+    }
+
+    public void print() {
+        MySinglyLinkedList<T> temp = next;
+        while (temp != null) {
+            System.out.println(temp.data + " ");
+            temp = temp.next;
+        }
     }
 } // end of MySinglyLinkedList class
