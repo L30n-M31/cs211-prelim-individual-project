@@ -5,11 +5,10 @@
 
 package prelim.misc;
 
-import java.lang.Throwable;
-
 public class ListOverflowException extends Throwable {
-    public void sendMessage() {
-        System.out.println("- Array overflow detected!!!");
-        System.out.println("- Unable to insert element into array");
-    } // end of sendExceptionMessage method
+    public ListOverflowException() {
+        super("Maximum Size reached");
+        System.out.println("\n- Array overflow detected!!! ");
+        System.out.println("- Unable to insert element");
+    } // end of default constructor
 } // end of ListOverflowException class
