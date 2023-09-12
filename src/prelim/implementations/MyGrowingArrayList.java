@@ -43,11 +43,20 @@ public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
         return dateSubmitted;
     }
 
+    public MyGrowingArrayList getElement(int index) {
+        return array[index];
+    }
+
+    public String toString() {
+        return "Project Name: " + this.getProjectName() + "\n" +
+                "Date Assigned: " + this.getDateAssigned() + "\n" +
+                "Date Submitted: " + this.getDateSubmitted() + "\n";
+    } // end of toString method
 
     @Override
     public int getSize() {
         return array.length;
-    }
+    } // end of getSize method
 
     @Override
     public void insert(MyGrowingArrayList data) {
@@ -65,6 +74,13 @@ public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
         array[i] = data;
     } // end of insert method
 
+    public MyGrowingArrayList[] increaseArraySize(MyGrowingArrayList[] oldArray, int length) {
+        MyGrowingArrayList[] newArray = new MyGrowingArrayList[length * 2];
+
+        System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+        return newArray;
+    } // end of increaseArraySize method
+
     @Override
     public MyGrowingArrayList getElement(MyGrowingArrayList data) throws NoSuchElementException {
         for (MyGrowingArrayList element : array) {
@@ -73,14 +89,14 @@ public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
                     return element;
             }
         }
-        return null;
+        throw new NoSuchElementException();
     } // end of getElement method
 
     @Override
     public boolean delete(MyGrowingArrayList data) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(data)) {
-                array[i] = null;
+        for (int index = 0; index < array.length; index++) {
+            if (array[index].equals(data)) {
+                array[index] = null;
                 return true;
             }
         }
@@ -89,36 +105,10 @@ public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
 
     @Override
     public int search(MyGrowingArrayList data) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) {
-                if (array[i].getProjectName().equalsIgnoreCase(data.getProjectName()))
-                    return i;
-            }
+        for (int index = 0; index < array.length; index++) {
+            if (array[index] == data)
+                return index;
         }
         return -1;
     } // end of search method
-
-    public MyGrowingArrayList[] increaseArraySize(MyGrowingArrayList[] oldArray, int length) {
-        MyGrowingArrayList[] newArray = new MyGrowingArrayList[length * 2];
-
-        for (int index = 0; index < oldArray.length; index++) {
-            newArray[index] = oldArray[index];
-        }
-        return newArray;
-    } // end of increaseArraySize method
-
-    public void showList() {
-        System.out.println("\n-------------------------------------------------------");
-        System.out.println("                    Current List                       ");
-        System.out.println("-------------------------------------------------------");
-        System.out.printf("%-25s%-16s%-17s%n", "Project", "Date Assigned", "Date Submitted");
-        System.out.printf("%-25s%-16s%-17s%n", "======================", "=============", "==============");
-        for (MyGrowingArrayList element : array) {
-            if (element != null) {
-                System.out.printf("%-25s%-16s%-17s%n", element.getProjectName(), element.getDateAssigned(),
-                        element.getDateSubmitted());
-            }
-        }
-        System.out.println("-------------------------------------------------------\n");
-    } // end of showList method
 } // end of MyGrowingArrayList class

@@ -6,7 +6,6 @@
 package prelim;
 
 import prelim.implementations.MyGrowingArrayList;
-import prelim.misc.ListOverflowException;
 
 import java.util.Scanner;
 
@@ -16,29 +15,26 @@ public class MyGrowingArrayListExecutable {
 
     public static void main(String[] args) {
         MyGrowingArrayListExecutable execute = new MyGrowingArrayListExecutable();
-        try {
-            execute.run();
-        } catch (ListOverflowException e1) {
-            e1.sendMessage();
-        }
+        execute.run();
     } // end of main method
 
-    public void run() throws ListOverflowException {
+    public void run() {
         int selection = 0;
-        while (selection != 4) {
+        while (selection != 5) {
             menu();
             selection = Integer.parseInt(readString("Enter among the choices above: "));
             switch (selection) {
                 case 1 -> addTasks();
                 case 2 -> deleteTask();
-                case 3 -> list.showList();
+                case 3 -> locateTask();
+                case 4 -> showList();
             }
         }
         System.out.println("\nExiting...");
         System.exit(0);
     } // end of run method
 
-    public void addTasks() throws ListOverflowException {
+    public void addTasks() {
         String projectName, dateAssigned, dateSubmitted;
 
         System.out.println("\nADD A TASK");
@@ -47,25 +43,45 @@ public class MyGrowingArrayListExecutable {
             dateAssigned = readString(">>> Date Assigned: ");
             dateSubmitted = readString(">>> Date Submitted: ");
 
-            try {
-                list.insert(new MyGrowingArrayList(projectName, dateAssigned, dateSubmitted));
-            } catch (Exception e) {
-                throw new ListOverflowException();
-            }
+            list.insert(new MyGrowingArrayList(projectName, dateAssigned, dateSubmitted));
+
             System.out.print("\nDo you want to add another task? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of addTasks method
 
     public void deleteTask() {
-        list.showList();
+        showList();
         String projectName;
 
         System.out.println("DELETE A TASK");
-        projectName = readString(">>> Enter Project Name: ");
+        projectName = readString(">>> Enter project name: ");
 
         MyGrowingArrayList element = list.getElement(new MyGrowingArrayList(projectName));
-        System.out.println(list.delete(element) ? "\n- Task has been deleted" : "\n- Task has not been deleted");
+        System.out.println(list.delete(element) ? ("\n- " + element.getProjectName() + " has been deleted") :
+                ("\n- " + element.getProjectName() + " has not been deleted"));
     } // end of deleteTask method
+
+    public void locateTask() {
+        String projectName;
+
+        System.out.println("\nVIEW TASK DETAILS");
+        projectName = readString(">>> Enter project name: ");
+
+        MyGrowingArrayList element = list.getElement(new MyGrowingArrayList(projectName));
+
+        int index = list.search(element);
+        if (index != 1) {
+            System.out.println("\n- found a match at position " + (index + 1));
+            System.out.println("\nDetails:");
+            System.out.println("=====================");
+            System.out.println(list.getElement(element).toString());
+        }
+    } // end of locateTask method
+
+    public String readString(String promptMessage) {
+        System.out.print(promptMessage);
+        return keyboard.nextLine();
+    } // end of readString method
 
     public void menu() {
         System.out.println("===============================================");
@@ -73,14 +89,25 @@ public class MyGrowingArrayListExecutable {
         System.out.println("|   ---------------------------------------   |");
         System.out.println("|     1. Add completed tasks to list          |");
         System.out.println("|     2. Delete completed tasks from list     |");
-        System.out.println("|     3. View all completed tasks             |");
-        System.out.println("|     4. Exit program                         |");
+        System.out.println("|     3. Locate task from list                |");
+        System.out.println("|     4. View all completed tasks             |");
+        System.out.println("|     5. Exit program                         |");
         System.out.println("===============================================");
     } // end of menu method
 
-    public String readString(String promptMessage) {
-        System.out.print(promptMessage);
-        return keyboard.nextLine();
-    } // end of readString method
-
+    public void showList() {
+        System.out.println("\n-------------------------------------------------------");
+        System.out.println("                    Current List                       ");
+        System.out.println("-------------------------------------------------------");
+        System.out.printf("%-25s%-16s%-17s%n", "Project", "Date Assigned", "Date Submitted");
+        System.out.printf("%-25s%-16s%-17s%n", "======================", "=============", "==============");
+        for (int index = 0; index < list.getSize(); index++) {
+            MyGrowingArrayList element = list.getElement(index);
+            if (element != null) {
+                System.out.printf("%-25s%-16s%-17s%n", element.getProjectName(), element.getDateAssigned(),
+                        element.getDateSubmitted());
+            }
+        }
+        System.out.println("-------------------------------------------------------\n");
+    } // end of showList method
 } // end of MyGrowingArrayListExecutable class
