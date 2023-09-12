@@ -5,6 +5,7 @@
 
 package prelim.implementations;
 
+import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
 import java.util.NoSuchElementException;
@@ -12,31 +13,28 @@ import java.util.NoSuchElementException;
 public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     private final String product;
     private final String brand;
-    private final String serialNumber;
+    private final String model;
     private String color;
-    private String weight;
     private final MyFixedSizeArrayList[] array = new MyFixedSizeArrayList[5];
 
     public MyFixedSizeArrayList() {
         product = null;
         brand = null;
-        serialNumber = null;
+        model = null;
         color = null;
-        weight = null;
     } // end of default constructor
 
-    public MyFixedSizeArrayList(String p, String b, String s, String c, String w) {
+    public MyFixedSizeArrayList(String p, String b, String m, String c) {
         product = p;
         brand = b;
-        serialNumber = s;
+        model = m;
         color = c;
-        weight = w;
     } // end of constructor
 
-    public MyFixedSizeArrayList(String p, String b, String s) {
+    public MyFixedSizeArrayList(String p, String b, String m) {
         product = p;
         brand = b;
-        serialNumber = s;
+        model = m;
     } // end of constructor
 
     public String getProduct() {
@@ -47,17 +45,25 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
         return brand;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public String getModel() {
+        return model;
     }
 
     public String getColor() {
         return color;
     }
 
-    public String getWeight() {
-        return weight;
+    public MyFixedSizeArrayList getElement(int index) {
+        return array[index];
     }
+
+    @Override
+    public String toString() {
+        return "Product: " + this.getProduct() + "\n" +
+                "Brand: " + this.getBrand() + "\n" +
+                "Model: " + this.getModel() + "\n" +
+                "Color: " + this.getColor() + "\n";
+    } // end of toString method
 
     @Override
     public int getSize() {
@@ -65,16 +71,18 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     } // end of getSize method
 
     @Override
-    public void insert(MyFixedSizeArrayList data) {
+    public void insert(MyFixedSizeArrayList data) throws ListOverflowException {
         int i = 0;
         for (int index = 0; index < array.length; index++) {
             if (array[index] == null) {
-                i = index;
-                break;
+                array[index] = data;
+                return;
             }
             i++;
         }
-        array[i] = data;
+        if (i >= array.length) {
+            throw new ListOverflowException();
+        }
     } // end of insert method
 
     @Override
@@ -83,18 +91,18 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
             if (element != null) {
                 if (element.getProduct().equalsIgnoreCase(data.getProduct()) &&
                         element.getBrand().equalsIgnoreCase(data.getBrand()) &&
-                        element.getSerialNumber().equalsIgnoreCase(data.getSerialNumber()))
+                        element.getModel().equalsIgnoreCase(data.getModel()))
                     return element;
             }
         }
-        return null;
+        throw new NoSuchElementException();
     } // end of getElement method
 
     @Override
     public boolean delete(MyFixedSizeArrayList data) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(data)) {
-                array[i] = null;
+        for (int index = 0; index < array.length; index++) {
+            if (array[index].equals(data)) {
+                array[index] = null;
                 return true;
             }
         }
@@ -103,35 +111,10 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
 
     @Override
     public int search(MyFixedSizeArrayList data) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) {
-                if (array[i].getProduct().equalsIgnoreCase(data.getProduct()) &&
-                        array[i].getBrand().equalsIgnoreCase(data.getBrand()) &&
-                        array[i].getSerialNumber().equalsIgnoreCase(data.getSerialNumber())) {
-                    return i;
-                }
-            }
+        for (int index = 0; index < array.length; index++) {
+            if (array[index] == data)
+                return index;
         }
         return -1;
     } // end of search method
-
-    /*
-     * Just to test if the methods are working
-     */
-    public void showList() {
-        System.out.println("\n--------------------------------------------------------------------");
-        System.out.println("                           Current List                             ");
-        System.out.println("--------------------------------------------------------------------");
-        System.out.printf("%-15s%-13s%-17s%-10s%-13s%n", "Product", "Brand", "Series No.", "Color", "Weight (g)");
-        System.out.printf("%-15s%-13s%-17s%-10s%-10s%n", "============", "==========", "==============",
-                "=======", "=============");
-        for (MyFixedSizeArrayList element : array) {
-            if (element != null) {
-                System.out.printf("%-15s%-13s%-17s%-10s%-10s%n", element.getProduct(), element.getBrand(),
-                        element.getSerialNumber(), element.getColor(), element.getWeight());
-            } else
-                System.out.printf("%-15s%-13s%-17s%-10s%-10s%n", "N/A", "N/A", "N/A", "N/A", "N/A");
-        }
-        System.out.println("--------------------------------------------------------------------\n");
-    } // end of showList method
 } // end of MyFixedSizeArrayList class
