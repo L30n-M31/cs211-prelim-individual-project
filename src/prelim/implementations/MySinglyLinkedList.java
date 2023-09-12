@@ -48,22 +48,34 @@ public class MySinglyLinkedList<T> implements MyList<T> {
         if (next == null)
             next = newNode;
         else {
-            MySinglyLinkedList<T> temp = next;
-            while (temp.getNext() != null)
-                temp = temp.getNext();
-            temp.setNext(newNode);
+            MySinglyLinkedList<T> pointer = next;
+            while (pointer.getNext() != null)
+                pointer = pointer.getNext();
+            pointer.setNext(newNode);
         }
     } // end of insert method
 
     @Override
     public T getElement(T data) throws NoSuchElementException {
         return null;
-    }
+    } // end of getElement method
 
     @Override
     public boolean delete(T data) {
+        MySinglyLinkedList<T> pointer = next;
+        if (next.getData().equals(data))
+            next = pointer.getNext();
+        else{
+            while (pointer.getNext() != null) {
+                if (pointer.getNext().getData().equals(data)) {
+                    pointer.setNext(pointer.getNext().getNext());
+                    return true;
+                }
+                pointer = pointer.getNext();
+            }
+        }
         return false;
-    }
+    } // end of delete method
 
     @Override
     public int search(T data) {
