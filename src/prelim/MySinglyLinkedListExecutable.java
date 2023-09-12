@@ -20,7 +20,7 @@ public class MySinglyLinkedListExecutable {
             singlyList.insert(four);
             singlyList.insert(five);
         } catch (ListOverflowException e) {
-            e.sendMessage();
+            e = new ListOverflowException();
         }
 
         singlyList.print();
