@@ -12,29 +12,23 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MyFixedSizeArrayListExecutable {
-    private final Scanner keyboard = new Scanner(System.in);
     private final MyFixedSizeArrayList list = new MyFixedSizeArrayList();
-    public static void main(String[] args) {
+    private final Scanner keyboard = new Scanner(System.in);
+    public static void main(String[] args) throws ListOverflowException {
         MyFixedSizeArrayListExecutable execute = new MyFixedSizeArrayListExecutable();
-        try {
-            execute.run();
-        } catch (ListOverflowException e1) {
-            e1.sendMessage();
-        } catch (NoSuchElementException e2) {
-            System.out.println("- element is not included in the list");
-        }
+        execute.run();
     } // end of main method
 
-    public void run() throws ListOverflowException, NoSuchElementException {
+    public void run() throws ListOverflowException {
         int selection = 0;
         while (selection != 5) {
             menu();
             selection = Integer.parseInt(readString("Enter among the choices above: "));
             switch (selection) {
                 case 1 -> addProducts();
-                case 2 -> deleteProducts();
+                case 2 -> deleteProduct();
                 case 3 -> locateProduct();
-                case 4 -> list.showList();
+                case 4 -> showList();
             }
         }
         System.out.println("\nExiting...");
@@ -42,54 +36,58 @@ public class MyFixedSizeArrayListExecutable {
     } // end of run method
 
     public void addProducts() throws ListOverflowException{
-        String product, brand, serialNumber, color, weight;
+        String product, brand, model, color;
 
         System.out.println("\nADD A PRODUCT");
         do {
             product = readString(">>> Product: ");
             brand = readString(">>> Brand: ");
-            serialNumber = readString(">>> Serial Number: ");
+            model = readString(">>> Model: ");
             color = readString(">>> Color: ");
-            weight = readString(">>> Weight: ");
 
-            try {
-                list.insert(new MyFixedSizeArrayList(product, brand, serialNumber, color, weight));
-            } catch (Exception e) {
-                throw new ListOverflowException();
-            }
+            list.insert(new MyFixedSizeArrayList(product, brand, model, color));
 
             System.out.print("\nDo you want to add another product? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of addProducts method
 
-    public void deleteProducts() throws NoSuchElementException {
-        list.showList();
-        String product, brand, serialNumber;
+    public void deleteProduct() throws NoSuchElementException {
+        showList();
+        String product, brand, model;
 
         System.out.println("DELETE A PRODUCT");
         product = readString(">>> Enter product: ");
         brand = readString(">>> Enter brand: ");
-        serialNumber = readString(">>> Enter serial number: ");
+        model = readString(">>> Enter model: ");
 
-        MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, serialNumber));
-        System.out.println(list.delete(element) ? "\n- Data has been deleted" : "\n- Data has not been deleted");
+        MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
+        System.out.println(list.delete(element) ? ("\n- " + element.getModel() + " has been deleted") :
+                ("\n- " + element.getModel() + " has not been deleted"));
     } // end of deleteProducts method
 
     public void locateProduct() {
-        String product, brand, serialNumber;
+        String product, brand, model;
 
-        System.out.println("\nLOCATE PRODUCT");
+        System.out.println("\nVIEW PRODUCT DETAILS");
         product = readString(">>> Enter product: ");
         brand = readString(">>> Enter brand: ");
-        serialNumber = readString(">>> Enter serial number: ");
+        model = readString(">>> Enter model: ");
 
-        MyFixedSizeArrayList element = new MyFixedSizeArrayList(product, brand, serialNumber);
+        MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
+
         int index = list.search(element);
-        if (index != -1)
-            System.out.println("\n- The product is number " + (index + 1) + " in the list");
-        else
-            System.out.println("\n- The product is not included in the list");
+        if (index != -1) {
+            System.out.println("\n- found a match at position " + (index + 1));
+            System.out.println("\nDetails:");
+            System.out.println("=====================");
+            System.out.println(list.getElement(element).toString());
+        }
     } // end of locateProduct method
+
+    public String readString(String promptMessage) {
+        System.out.print(promptMessage);
+        return keyboard.nextLine();
+    } // end of readString method
 
     public void menu() {
         System.out.println("=======================================");
@@ -103,8 +101,20 @@ public class MyFixedSizeArrayListExecutable {
         System.out.println("=======================================");
     } // end of menu method
 
-    public String readString(String promptMessage) {
-        System.out.print(promptMessage);
-        return keyboard.nextLine();
-    } // end of readString method
+    public void showList() {
+        System.out.println("\n------------------------------------------------");
+        System.out.println("                  Current List                  ");
+        System.out.println("------------------------------------------------");
+        System.out.printf("%-15s%-13s%-13s%-10s%n", "Product", "Brand", "Model", "Color");
+        System.out.printf("%-15s%-13s%-13s%-10s%n", "============", "==========", "==========", "=======");
+        for (int index = 0; index < list.getSize(); index++) {
+            MyFixedSizeArrayList element = list.getElement(index);
+            if (element != null) {
+                System.out.printf("%-15s%-13s%-13s%-10s%n", element.getProduct(), element.getBrand(),
+                        element.getModel(), element.getColor());
+            } else
+                System.out.printf("%-15s%-13s%-13s%-10s%n", "N/A", "N/A", "N/A", "N/A");
+        }
+        System.out.println("------------------------------------------------\n");
+    } // end of showList method
 } // end of ExecutableOne class
