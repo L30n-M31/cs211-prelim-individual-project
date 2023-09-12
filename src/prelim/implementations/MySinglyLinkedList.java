@@ -44,9 +44,15 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public void insert(T data) throws ListOverflowException {
-        MySinglyLinkedList<T> newNode = new MySinglyLinkedList<T>(data);
-        newNode.next = next;
-        next = newNode;
+        MySinglyLinkedList<T> newNode = new MySinglyLinkedList<>(data);
+        if (next == null)
+            next = newNode;
+        else {
+            MySinglyLinkedList<T> temp = next;
+            while (temp.getNext() != null)
+                temp = temp.getNext();
+            temp.setNext(newNode);
+        }
     } // end of insert method
 
     @Override
