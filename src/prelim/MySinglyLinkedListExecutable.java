@@ -19,5 +19,9 @@ public class MySinglyLinkedListExecutable {
         singlyList.insert(four);
         singlyList.insert(five);
         singlyList.print();
+
+        System.out.println();
+        singlyList.delete(three);
+        singlyList.print();
     }
 }
