@@ -73,7 +73,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public void insert(MyFixedSizeArrayList data) throws ListOverflowException {
         int i = 0;
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < getSize(); index++) {
             if (array[index] == null) {
                 array[index] = data;
                 return;
@@ -100,7 +100,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
 
     @Override
     public boolean delete(MyFixedSizeArrayList data) {
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < getSize(); index++) {
             if (array[index].equals(data)) {
                 array[index] = null;
                 return true;
@@ -111,7 +111,7 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
 
     @Override
     public int search(MyFixedSizeArrayList data) {
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < getSize(); index++) {
             if (array[index] == data)
                 return index;
         }
