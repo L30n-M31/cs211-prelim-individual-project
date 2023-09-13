@@ -23,5 +23,8 @@ public class MySinglyLinkedListExecutable {
         System.out.println();
         singlyList.delete(three);
         singlyList.print();
+
+        String element = singlyList.getElement(two);
+        System.out.println("\n" + element);
     }
 }
