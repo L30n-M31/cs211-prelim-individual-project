@@ -5,6 +5,7 @@
 
 package prelim.implementations;
 
+import prelim.MySinglyLinkedListExecutable;
 import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
@@ -57,7 +58,19 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public T getElement(T data) throws NoSuchElementException {
-        return null;
+        MySinglyLinkedList<T> pointer = next;
+        if (pointer.getData().equals(data)) {
+            return pointer.getData();
+        }
+        else {
+            while (pointer.getNext() != null) {
+                if (pointer.getData().equals(data)) {
+                    return pointer.getData();
+                }
+                pointer = pointer.getNext();
+            }
+        }
+        throw new NoSuchElementException();
     } // end of getElement method
 
     @Override
