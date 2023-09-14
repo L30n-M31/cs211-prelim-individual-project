@@ -5,15 +5,13 @@
 
 package prelim.implementations;
 
-import prelim.MySinglyLinkedListExecutable;
-import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 
 import java.util.NoSuchElementException;
 
 public class MySinglyLinkedList<T> implements MyList<T> {
 
-    private T data;
+    private final T data;
     private MySinglyLinkedList<T> next;
 
     public MySinglyLinkedList() {
@@ -44,7 +42,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     }
 
     @Override
-    public void insert(T data) throws ListOverflowException {
+    public void insert(T data) {
         MySinglyLinkedList<T> newNode = new MySinglyLinkedList<>(data);
         if (next == null)
             next = newNode;
