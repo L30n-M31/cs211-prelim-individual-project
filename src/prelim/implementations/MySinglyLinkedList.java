@@ -74,7 +74,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     @Override
     public boolean delete(T data) {
         MySinglyLinkedList<T> pointer = next;
-        if (next.getData().equals(data))
+        if (pointer.getData().equals(data))
             next = pointer.getNext();
         else{
             while (pointer.getNext() != null) {
@@ -90,8 +90,16 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public int search(T data) {
-        return 0;
-    }
+        int index = 0;
+        MySinglyLinkedList<T> pointer = next;
+        while (pointer.getNext() != null) {
+            if (pointer.getData().equals(data))
+                return index;
+            pointer = pointer.getNext();
+            index++;
+        }
+        return -1;
+    } // end of search method
 
     public void print() {
         MySinglyLinkedList<T> temp = next;
