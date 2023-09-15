@@ -50,32 +50,39 @@ public class MyGrowingArrayListExecutable {
     } // end of addTasks method
 
     public void deleteTask() {
-        showList();
         String projectName;
 
         System.out.println("DELETE A TASK");
-        projectName = readString(">>> Enter project name: ");
+        do {
+            showList();
+            projectName = readString(">>> Enter project name: ");
 
-        MyGrowingArrayList element = list.getElement(new MyGrowingArrayList(projectName));
-        System.out.println(list.delete(element) ? ("\n- " + element.getProjectName() + " has been deleted") :
-                ("\n- " + element.getProjectName() + " has not been deleted"));
+            MyGrowingArrayList element = list.getElement(new MyGrowingArrayList(projectName));
+            System.out.println(list.delete(element) ? ("\n- " + element.getProjectName() + " has been deleted") :
+                    ("\n- " + element.getProjectName() + " has not been deleted"));
+
+            System.out.print("\nDo you want to delete another task? <y/n>: ");
+        } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of deleteTask method
 
     public void locateTask() {
         String projectName;
 
         System.out.println("\nVIEW TASK DETAILS");
-        projectName = readString(">>> Enter project name: ");
+        do {
+            projectName = readString(">>> Enter project name: ");
 
-        MyGrowingArrayList element = list.getElement(new MyGrowingArrayList(projectName));
+            MyGrowingArrayList element = list.getElement(new MyGrowingArrayList(projectName));
 
-        int index = list.search(element);
-        if (index != 1) {
-            System.out.println("\n- found a match at position " + (index + 1));
-            System.out.println("\nDetails:");
-            System.out.println("=====================");
-            System.out.println(list.getElement(element).toString());
-        }
+            int index = list.search(element);
+            if (index != 1) {
+                System.out.println("\n- found a match at position " + (index + 1));
+                System.out.println("\nDetails:");
+                System.out.println("=====================");
+                System.out.println(list.getElement(element).toString());
+            }
+            System.out.print("Do you want to find another task? <y/n>: ");
+        } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of locateTask method
 
     public String readString(String promptMessage) {

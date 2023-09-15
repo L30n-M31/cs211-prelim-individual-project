@@ -52,36 +52,43 @@ public class MyFixedSizeArrayListExecutable {
     } // end of addProducts method
 
     public void deleteProduct() throws NoSuchElementException {
-        showList();
         String product, brand, model;
 
         System.out.println("DELETE A PRODUCT");
-        product = readString(">>> Enter product: ");
-        brand = readString(">>> Enter brand: ");
-        model = readString(">>> Enter model: ");
+        do {
+            showList();
+            product = readString(">>> Enter product: ");
+            brand = readString(">>> Enter brand: ");
+            model = readString(">>> Enter model: ");
 
-        MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
-        System.out.println(list.delete(element) ? ("\n- " + element.getModel() + " has been deleted") :
-                ("\n- " + element.getModel() + " has not been deleted"));
+            MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
+            System.out.println(list.delete(element) ? ("\n- " + element.getModel() + " has been deleted") :
+                    ("\n- " + element.getModel() + " has not been deleted"));
+
+            System.out.print("\nDo you want to delete another product? <y/n>: ");
+        } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of deleteProducts method
 
     public void locateProduct() {
         String product, brand, model;
 
         System.out.println("\nVIEW PRODUCT DETAILS");
-        product = readString(">>> Enter product: ");
-        brand = readString(">>> Enter brand: ");
-        model = readString(">>> Enter model: ");
+        do {
+            product = readString(">>> Enter product: ");
+            brand = readString(">>> Enter brand: ");
+            model = readString(">>> Enter model: ");
 
-        MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
+            MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
 
-        int index = list.search(element);
-        if (index != -1) {
-            System.out.println("\n- found a match at position " + (index + 1));
-            System.out.println("\nDetails:");
-            System.out.println("=====================");
-            System.out.println(list.getElement(element).toString());
-        }
+            int index = list.search(element);
+            if (index != -1) {
+                System.out.println("\n- found a match at position " + (index + 1));
+                System.out.println("\nDetails:");
+                System.out.println("=====================");
+                System.out.println(list.getElement(element).toString());
+            }
+            System.out.print("Do you want to find another product? <y/n>: ");
+        } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of locateProduct method
 
     public String readString(String promptMessage) {
