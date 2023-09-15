@@ -73,11 +73,26 @@ public class MySinglyLinkedList<T> implements MyList<T> {
         throw new NoSuchElementException();
     } // end of getElement method
 
+    public T getElement(int index) {
+        int currentPosition = 0;
+        MySinglyLinkedList<T> currentPointer = next;
+        while (currentPosition <= getSize()) {
+            if (currentPosition == index)
+                return currentPointer.getData();
+            currentPointer = currentPointer.getNext();
+            currentPosition++;
+        }
+        throw new NoSuchElementException();
+    } // end of getElement method
+
     @Override
     public boolean delete(T data) {
         MySinglyLinkedList<T> currentPointer = next;
-        if (currentPointer.getData().equals(data))
+        if (currentPointer.getData().equals(data)) {
             next = currentPointer.getNext();
+            size--;
+            return true;
+        }
         else{
             MySinglyLinkedList<T> previousPointer = next;
             while (currentPointer.getNext() != null) {
