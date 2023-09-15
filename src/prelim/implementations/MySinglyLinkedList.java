@@ -47,25 +47,25 @@ public class MySinglyLinkedList<T> implements MyList<T> {
         if (next == null)
             next = newNode;
         else {
-            MySinglyLinkedList<T> pointer = next;
-            while (pointer.getNext() != null)
-                pointer = pointer.getNext();
-            pointer.setNext(newNode);
+            MySinglyLinkedList<T> currentPointer = next;
+            while (currentPointer.getNext() != null)
+                currentPointer = currentPointer.getNext();
+            currentPointer.setNext(newNode);
         }
     } // end of insert method
 
     @Override
     public T getElement(T data) throws NoSuchElementException {
-        MySinglyLinkedList<T> pointer = next;
-        if (pointer.getData().equals(data)) {
-            return pointer.getData();
+        MySinglyLinkedList<T> currentPointer = next;
+        if (currentPointer.getData().equals(data)) {
+            return currentPointer.getData();
         }
         else {
-            while (pointer.getNext() != null) {
-                if (pointer.getData().equals(data)) {
-                    return pointer.getData();
+            while (currentPointer.getNext() != null) {
+                if (currentPointer.getData().equals(data)) {
+                    return currentPointer.getData();
                 }
-                pointer = pointer.getNext();
+                currentPointer = currentPointer.getNext();
             }
         }
         throw new NoSuchElementException();
@@ -73,16 +73,18 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean delete(T data) {
-        MySinglyLinkedList<T> pointer = next;
-        if (pointer.getData().equals(data))
-            next = pointer.getNext();
+        MySinglyLinkedList<T> currentPointer = next;
+        if (currentPointer.getData().equals(data))
+            next = currentPointer.getNext();
         else{
-            while (pointer.getNext() != null) {
-                if (pointer.getNext().getData().equals(data)) {
-                    pointer.setNext(pointer.getNext().getNext());
+            MySinglyLinkedList<T> previousPointer = next;
+            while (currentPointer.getNext() != null) {
+                if (currentPointer.getData().equals(data)) {
+                    previousPointer.setNext(currentPointer.getNext());
                     return true;
                 }
-                pointer = pointer.getNext();
+                previousPointer = currentPointer;
+                currentPointer = currentPointer.getNext();
             }
         }
         return false;
@@ -91,11 +93,11 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     @Override
     public int search(T data) {
         int index = 0;
-        MySinglyLinkedList<T> pointer = next;
-        while (pointer.getNext() != null) {
-            if (pointer.getData().equals(data))
+        MySinglyLinkedList<T> currentPointer = next;
+        while (currentPointer.getNext() != null) {
+            if (currentPointer.getData().equals(data))
                 return index;
-            pointer = pointer.getNext();
+            currentPointer = currentPointer.getNext();
             index++;
         }
         return -1;
