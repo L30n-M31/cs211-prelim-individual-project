@@ -60,18 +60,15 @@ public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
 
     @Override
     public void insert(MyGrowingArrayList data) {
-        int i = 0;
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < getSize(); index++) {
             if (index == array.length - 1) {
                 array = increaseArraySize(array, getSize());
             }
             if (array[index] == null) {
-                i = index;
-                break;
+                array[index] = data;
+                return;
             }
-            i++;
         }
-        array[i] = data;
     } // end of insert method
 
     public MyGrowingArrayList[] increaseArraySize(MyGrowingArrayList[] oldArray, int length) {
@@ -94,10 +91,12 @@ public class MyGrowingArrayList implements MyList<MyGrowingArrayList> {
 
     @Override
     public boolean delete(MyGrowingArrayList data) {
-        for (int index = 0; index < array.length; index++) {
-            if (array[index].equals(data)) {
-                array[index] = null;
-                return true;
+        for (int index = 0; index < getSize(); index++) {
+            if (array[index] != null) {
+                if (array[index].equals(data)) {
+                    array[index] = null;
+                    return true;
+                }
             }
         }
         return false;
