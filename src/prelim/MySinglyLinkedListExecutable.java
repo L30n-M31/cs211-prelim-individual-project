@@ -20,7 +20,6 @@ public class MySinglyLinkedListExecutable {
     } // end of main method
 
     public void run() {
-
         int selection = 0;
         while (selection != 5) {
             menu();
@@ -94,4 +93,4 @@ public class MySinglyLinkedListExecutable {
         System.out.println("|     5. Exit program                   |");
         System.out.println("=========================================");
     } // end of menu method
-}
+} // end of MySinglyLinkedListExecutable class
