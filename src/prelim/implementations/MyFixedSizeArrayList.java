@@ -101,9 +101,11 @@ public class MyFixedSizeArrayList implements MyList<MyFixedSizeArrayList> {
     @Override
     public boolean delete(MyFixedSizeArrayList data) {
         for (int index = 0; index < getSize(); index++) {
-            if (array[index].equals(data)) {
-                array[index] = null;
-                return true;
+            if (array[index] != null) {
+                if (array[index].equals(data)) {
+                    array[index] = null;
+                    return true;
+                }
             }
         }
         return false;
