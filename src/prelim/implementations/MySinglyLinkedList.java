@@ -13,6 +13,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     private final T data;
     private MySinglyLinkedList<T> next;
+    private int size = 0;
 
     public MySinglyLinkedList() {
         data = null;
@@ -38,7 +39,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public int getSize() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -52,6 +53,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
                 currentPointer = currentPointer.getNext();
             currentPointer.setNext(newNode);
         }
+        size++;
     } // end of insert method
 
     @Override
@@ -81,6 +83,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
             while (currentPointer.getNext() != null) {
                 if (currentPointer.getData().equals(data)) {
                     previousPointer.setNext(currentPointer.getNext());
+                    size--;
                     return true;
                 }
                 previousPointer = currentPointer;
