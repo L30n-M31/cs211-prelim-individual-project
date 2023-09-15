@@ -9,6 +9,6 @@ public class ListOverflowException extends Throwable {
     public ListOverflowException() {
         super("Maximum Size reached");
         System.out.println("\n- Array overflow detected!!! ");
-        System.out.println("- Unable to insert element");
+        System.out.println("- Unable to insert element\n");
     } // end of default constructor
 } // end of ListOverflowException class
