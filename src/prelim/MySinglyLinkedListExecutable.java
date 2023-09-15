@@ -1,10 +1,14 @@
+/**
+ * @author Leonhard Leung
+ * Date: 09/11/2023
+ */
+
 package prelim;
 
 import prelim.implementations.MySinglyLinkedList;
-import prelim.misc.ListOverflowException;
 
 public class MySinglyLinkedListExecutable {
-    public static void main(String[] args) throws ListOverflowException{
+    public static void main(String[] args) {
         MySinglyLinkedList<String> singlyList = new MySinglyLinkedList<>();
 
         String one = "one";
