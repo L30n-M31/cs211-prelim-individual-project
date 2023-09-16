@@ -7,16 +7,23 @@ package prelim;
 
 import prelim.implementations.MySinglyLinkedList;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MySinglyLinkedListExecutable {
 
     private final Scanner keyboard = new Scanner(System.in);
-    MySinglyLinkedList<String> singlyList = new MySinglyLinkedList<>();
+    MySinglyLinkedList<StudentList> singlyList = new MySinglyLinkedList<>();
 
     public static void main(String[] args) {
         MySinglyLinkedListExecutable execute = new MySinglyLinkedListExecutable();
-        execute.run();
+        try {
+            execute.run();
+        } catch (NoSuchElementException e) {
+            System.out.println("\n- element not found\n");
+            System.out.println("Exiting...\n");
+            e.printStackTrace();
+        }
     } // end of main method
 
     public void run() {
@@ -27,8 +34,8 @@ public class MySinglyLinkedListExecutable {
             switch (selection) {
                 case 1 -> addStudent();
                 case 2 -> removeStudent();
-                case 3 -> locateStudent();
-                case 4 -> showStudents();
+                case 3 -> findStudent();
+                case 4 -> showList();
             }
         }
         System.out.println("\nExiting...");
@@ -36,50 +43,57 @@ public class MySinglyLinkedListExecutable {
     } // end of run method
 
     public void addStudent() {
+        String firstName, lastName, IDNumber;
+
         System.out.println("\nADD A STUDENT");
         do {
-            String name = readString(">>> Enter students' name: ");
-            singlyList.insert(name);
+            firstName = readString(">>> Enter first name: ");
+            lastName = readString(">>> Enter last name: ");
+            IDNumber = readString(">>> Enter ID number: ");
+
+            singlyList.insert(new StudentList(firstName, lastName, IDNumber));
 
             System.out.print("\nDo you want to add another student? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of addStudent method
 
     public void removeStudent() {
-        System.out.println("REMOVE A STUDENT");
+        String firstName, lastName;
+
+        System.out.println("\nREMOVE A STUDENT");
         do {
-            showStudents();
-            String name = readString(">>> Name of student: ");
-            System.out.println(singlyList.delete(name) ? ("\n- " + name + " has been deleted") :
-                    ("\n- " + name + " has not been deleted"));
+            showList();
+            firstName = readString(">>> First name: ");
+            lastName = readString(">>> Last name: ");
+
+            boolean successfulDeletion = singlyList.delete(singlyList.getElement(new StudentList(firstName, lastName)));
+            System.out.println(successfulDeletion ? ("\n- " + firstName + " has been removed") :
+                    ("\n- " + firstName + " has not been removed"));
+
             System.out.print("\nDo you want to remove another student? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of removeStudent method
 
-    public void locateStudent() {
-        System.out.println("\nFIND STUDENT");
-        String name = readString(">>> Name of student: ");
+    public void findStudent() {
+        String firstName, lastName;
 
-        String element = singlyList.getElement(name);
-        int index = singlyList.search(element);
-        if (index != -1) {
-            System.out.println("\n- found a match at position " + (index + 1));
-            System.out.println("\nDetails:");
-            System.out.println("=====================");
-            System.out.println("Student: " + element + "\n");
-        }
-    } // end of locateStudent method
+        System.out.println("\nFIND A STUDENT");
+        do {
+            firstName = readString(">>> First name: ");
+            lastName = readString(">>> Last name: ");
 
-    public void showStudents() {
-        System.out.println("\n--------------------------------");
-        System.out.println("         Student List           ");
-        System.out.println("--------------------------------");
-        for (int index = 0; index < singlyList.getSize(); index++) {
-            String element = singlyList.getElement(index);
-            System.out.println("\t" + (index + 1) + ". " + element);
-        }
-        System.out.println("--------------------------------\n");
-    } // end of showStudents method
+            StudentList student = singlyList.getElement(new StudentList(firstName, lastName));
+
+            int index = singlyList.search(student);
+            if (index != -1) {
+                System.out.println("\n- found a match at position " + (index + 1) + " from the list");
+                System.out.println("\nDetails");
+                System.out.println("============================");
+                System.out.println(student.displayDetails());
+            }
+            System.out.print("Do you want to find another student? <y/n>: ");
+        } while (keyboard.nextLine().equalsIgnoreCase("y"));
+    } // end of findStudent method
 
     public String readString(String promptMessage) {
         System.out.print(promptMessage);
@@ -97,4 +111,56 @@ public class MySinglyLinkedListExecutable {
         System.out.println("|     5. Exit program                   |");
         System.out.println("=========================================");
     } // end of menu method
+
+    public void showList() {
+        System.out.println("\n------------------------------------------");
+        System.out.println("               Student List               ");
+        System.out.println("------------------------------------------");
+        System.out.printf("%-15s%-16s%-14s%n", "First Name", "Last Name", "ID Number");
+        System.out.printf("%-15s%-16s%-14s%n", "============", "=============", "===========");
+        for (int index = 0; index < singlyList.getSize(); index++) {
+            StudentList element = singlyList.getElement(index);
+            System.out.printf("%-15s%-16s%-14s%n", element.getFirstName(), element.getLastName(), element.getIDNumber());
+        }
+        System.out.println("------------------------------------------\n");
+    } // end of showList method
+
+    private static class StudentList {
+        private final String firstName;
+        private final String lastName;
+        private String IDNumber;
+
+        public StudentList(String fN, String lN, String ID) {
+            firstName = fN;
+            lastName = lN;
+            IDNumber = ID;
+        } // end of constructor
+
+        public StudentList(String fN, String lN) {
+            firstName = fN;
+            lastName = lN;
+        } // end of constructor
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public String getIDNumber() {
+            return IDNumber;
+        }
+
+        public String displayDetails() {
+            return "Name: " + this.getFirstName() + " " + this.getLastName() + "\n" +
+                    "ID number: " + this.getIDNumber() + "\n";
+        } // end of displayDetails
+
+        @Override
+        public String toString() {
+            return firstName + "," + lastName;
+        } // end of toString method
+    } // end of StudentList class
 } // end of MySinglyLinkedListExecutable class
