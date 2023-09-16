@@ -38,7 +38,7 @@ public class MySinglyLinkedListExecutable {
     public void addStudent() {
         System.out.println("\nADD A STUDENT");
         do {
-            String name = readString(">>> Enter student's name: ");
+            String name = readString(">>> Enter students' name: ");
             singlyList.insert(name);
 
             System.out.print("\nDo you want to add another student? <y/n>: ");
