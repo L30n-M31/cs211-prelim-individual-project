@@ -1,6 +1,6 @@
 /**
  * @author Leonhard Leung
- * Date: 09/06/2023
+ * Date: 09/16/2023 (updated)
  */
 
 package prelim;
@@ -14,9 +14,18 @@ import java.util.Scanner;
 public class MyFixedSizeArrayListExecutable {
     private final MyFixedSizeArrayList list = new MyFixedSizeArrayList();
     private final Scanner keyboard = new Scanner(System.in);
-    public static void main(String[] args) throws ListOverflowException {
+    public static void main(String[] args) {
         MyFixedSizeArrayListExecutable execute = new MyFixedSizeArrayListExecutable();
-        execute.run();
+        try {
+            execute.run();
+        } catch (ListOverflowException e1) {
+            System.out.println("Exiting...\n");
+            e1.printStackTrace();
+        } catch (NoSuchElementException e2) {
+            System.out.println("\n- element not found\n");
+            System.out.println("Exiting...\n");
+            e2.printStackTrace();
+        }
     } // end of main method
 
     public void run() throws ListOverflowException {
@@ -25,9 +34,9 @@ public class MyFixedSizeArrayListExecutable {
             menu();
             selection = Integer.parseInt(readString("Enter among the choices above: "));
             switch (selection) {
-                case 1 -> addProducts();
-                case 2 -> deleteProduct();
-                case 3 -> locateProduct();
+                case 1 -> addPhone();
+                case 2 -> deletePhone();
+                case 3 -> viewPhone();
                 case 4 -> showList();
             }
         }
@@ -35,61 +44,59 @@ public class MyFixedSizeArrayListExecutable {
         System.exit(0);
     } // end of run method
 
-    public void addProducts() throws ListOverflowException{
-        String product, brand, model, color;
+    public void addPhone() throws ListOverflowException{
+        String brand, model, color, storage;
 
-        System.out.println("\nADD A PRODUCT");
+        System.out.println("\nADD A PHONE");
         do {
-            product = readString(">>> Product: ");
-            brand = readString(">>> Brand: ");
-            model = readString(">>> Model: ");
-            color = readString(">>> Color: ");
+            brand = readString(">>> Enter brand: ");
+            model = readString(">>> Enter model: ");
+            color = readString(">>> Enter color: ");
+            storage = readString(">>> Enter storage space: ");
 
-            list.insert(new MyFixedSizeArrayList(product, brand, model, color));
+            list.insert(new PhoneList(brand, model, color, storage));
 
-            System.out.print("\nDo you want to add another product? <y/n>: ");
+            System.out.print("\nDo you want to add another phone? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of addProducts method
+    } // end of addPhone method
 
-    public void deleteProduct() throws NoSuchElementException {
-        String product, brand, model;
+    public void deletePhone() {
+        String brand, model;
 
-        System.out.println("DELETE A PRODUCT");
+        System.out.println("DELETE A PHONE");
         do {
             showList();
-            product = readString(">>> Enter product: ");
-            brand = readString(">>> Enter brand: ");
-            model = readString(">>> Enter model: ");
+            brand = readString(">>> Brand: ");
+            model = readString(">>> Model: ");
 
-            MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
-            System.out.println(list.delete(element) ? ("\n- " + element.getModel() + " has been deleted") :
-                    ("\n- " + element.getModel() + " has not been deleted"));
+            boolean successfulDeletion = list.delete(list.getElement(new PhoneList(brand, model)));
+            System.out.println(successfulDeletion ? ("\n- " + model + " has been deleted") :
+                    ("\n- " + model + " has not been deleted"));
 
-            System.out.print("\nDo you want to delete another product? <y/n>: ");
+            System.out.print("\nDo you want to delete another phone? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of deleteProducts method
+    } // end of deletePhone method
 
-    public void locateProduct() {
-        String product, brand, model;
+    public void viewPhone() {
+        String brand, model;
 
-        System.out.println("\nVIEW PRODUCT DETAILS");
+        System.out.println("\nVIEW PHONE DETAILS");
         do {
-            product = readString(">>> Enter product: ");
-            brand = readString(">>> Enter brand: ");
-            model = readString(">>> Enter model: ");
+            brand = readString(">>> Brand: ");
+            model = readString(">>> Model: ");
 
-            MyFixedSizeArrayList element = list.getElement(new MyFixedSizeArrayList(product, brand, model));
+            PhoneList phone = (PhoneList) list.getElement(new PhoneList(brand, model));
 
-            int index = list.search(element);
+            int index = list.search(phone);
             if (index != -1) {
-                System.out.println("\n- found a match at position " + (index + 1));
-                System.out.println("\nDetails:");
+                System.out.println("\n- found a match at position " + (index + 1) + " from the list");
+                System.out.println("\nDetails");
                 System.out.println("=====================");
-                System.out.println(list.getElement(element).toString());
+                System.out.println(phone.displayDetails());
             }
             System.out.print("Do you want to find another product? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of locateProduct method
+    } // end of viewPhone method
 
     public String readString(String promptMessage) {
         System.out.print(promptMessage);
@@ -97,31 +104,80 @@ public class MyFixedSizeArrayListExecutable {
     } // end of readString method
 
     public void menu() {
-        System.out.println("=======================================");
-        System.out.println("|              MAIN MENU              |");
-        System.out.println("|   -------------------------------   |");
-        System.out.println("|     1. Add product to list          |");
-        System.out.println("|     2. Delete product from list     |");
-        System.out.println("|     3. Locate product from list     |");
-        System.out.println("|     4. View list                    |");
-        System.out.println("|     5. Exit program                 |");
-        System.out.println("=======================================");
+        System.out.println("=====================================");
+        System.out.println("|             MAIN MENU             |");
+        System.out.println("|   -----------------------------   |");
+        System.out.println("|     1. Add phone to list          |");
+        System.out.println("|     2. Delete phone from list     |");
+        System.out.println("|     3. View phone details         |");
+        System.out.println("|     4. View list                  |");
+        System.out.println("|     5. Exit program               |");
+        System.out.println("=====================================");
     } // end of menu method
 
     public void showList() {
-        System.out.println("\n------------------------------------------------");
-        System.out.println("                  Current List                  ");
-        System.out.println("------------------------------------------------");
-        System.out.printf("%-15s%-13s%-13s%-10s%n", "Product", "Brand", "Model", "Color");
-        System.out.printf("%-15s%-13s%-13s%-10s%n", "============", "==========", "==========", "=======");
+        System.out.println("\n-------------------------------------------");
+        System.out.println("                Phone List                 ");
+        System.out.println("-------------------------------------------");
+        System.out.printf("%-13s%-13s%-10s%-10s%n", "Brand", "Model", "Color", "Storage");
+        System.out.printf("%-13s%-13s%-10s%-10s%n", "==========", "==========", "=======", "=======");
         for (int index = 0; index < list.getSize(); index++) {
-            MyFixedSizeArrayList element = list.getElement(index);
+            PhoneList element = (PhoneList) list.getElement(index);
             if (element != null) {
-                System.out.printf("%-15s%-13s%-13s%-10s%n", element.getProduct(), element.getBrand(),
-                        element.getModel(), element.getColor());
-            } else
-                System.out.printf("%-15s%-13s%-13s%-10s%n", "N/A", "N/A", "N/A", "N/A");
+                System.out.printf("%-13s%-13s%-10s%-10s%n", element.getBrand(), element.getModel(),
+                        element.getColor(), element.getStorage());
+            }
         }
-        System.out.println("------------------------------------------------\n");
+        System.out.println("-------------------------------------------\n");
     } // end of showList method
+
+    /**
+     * This class holds the details of a phone such as the brand, model, color, and storage space
+     */
+    private static class PhoneList {
+        private final String brand;
+        private final String model;
+        private String color;
+        private String storage;
+
+        public PhoneList(String b, String m, String c, String s) {
+            brand = b;
+            model = m;
+            color = c;
+            storage = s;
+        } // end of constructor
+
+        public PhoneList(String b, String m) {
+            brand = b;
+            model = m;
+        } // end of constructor
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public String getModel() {
+            return model;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public String getStorage() {
+            return storage;
+        }
+
+        public String displayDetails() {
+            return "Brand: " + this.getBrand() + "\n" +
+                    "Model: " + this.getModel() + "\n" +
+                    "Color: " + this.getColor() + "\n" +
+                    "Storage: " + this.getStorage() + "\n";
+        } // end of displayDetails method
+
+        @Override
+        public String toString() {
+            return brand + "," + model;
+        } // end of toString method
+    } // end of PhoneList class
 } // end of ExecutableOne class
