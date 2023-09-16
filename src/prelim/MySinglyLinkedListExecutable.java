@@ -62,8 +62,12 @@ public class MySinglyLinkedListExecutable {
 
         String element = singlyList.getElement(name);
         int index = singlyList.search(element);
-        if (index != -1)
+        if (index != -1) {
             System.out.println("\n- found a match at position " + (index + 1));
+            System.out.println("\nDetails:");
+            System.out.println("=====================");
+            System.out.println("Student: " + element + "\n");
+        }
     } // end of locateStudent method
 
     public void showStudents() {
