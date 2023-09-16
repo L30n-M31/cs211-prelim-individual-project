@@ -63,7 +63,7 @@ public class MyFixedSizeArrayListExecutable {
     public void deletePhone() {
         String brand, model;
 
-        System.out.println("DELETE A PHONE");
+        System.out.println("\nDELETE A PHONE");
         do {
             showList();
             brand = readString(">>> Brand: ");
