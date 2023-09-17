@@ -56,7 +56,6 @@ public class MySinglyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean delete(T data) {
-
         Node<T> currentPointer = next;
         Node<T> previousPointer = next;
         for (int i = 0; i < getSize(); i++) {
