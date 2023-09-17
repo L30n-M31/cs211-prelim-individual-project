@@ -28,6 +28,10 @@ public class MyFixedSizeArrayListExecutable {
         }
     } // end of main method
 
+    /**
+     * Method that directs the program to a specific operation
+     * @throws ListOverflowException thrown when it receives an exception from one of the invoked methods
+     */
     public void run() throws ListOverflowException {
         int selection = 0;
         while (selection != 5) {
@@ -35,8 +39,8 @@ public class MyFixedSizeArrayListExecutable {
             selection = Integer.parseInt(readString("Enter among the choices above: "));
             switch (selection) {
                 case 1 -> addPhone();
-                case 2 -> deletePhone();
-                case 3 -> viewPhone();
+                case 2 -> removePhone();
+                case 3 -> findPhone();
                 case 4 -> showList();
             }
         }
@@ -44,6 +48,10 @@ public class MyFixedSizeArrayListExecutable {
         System.exit(0);
     } // end of run method
 
+    /**
+     * Method that adds a phone to an array
+     * @throws ListOverflowException thrown when an element is still being inserted to a list at maximum capacity
+     */
     public void addPhone() throws ListOverflowException{
         String brand, model, color, storage;
 
@@ -54,38 +62,44 @@ public class MyFixedSizeArrayListExecutable {
             color = readString(">>> Enter color: ");
             storage = readString(">>> Enter storage space: ");
 
-            list.insert(new PhoneList(brand, model, color, storage));
+            list.insert(new Phone(brand, model, color, storage));
 
             System.out.print("\nDo you want to add another phone? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of addPhone method
 
-    public void deletePhone() {
+    /**
+     * Method that removes a phone in an array
+     */
+    public void removePhone() {
         String brand, model;
 
-        System.out.println("\nDELETE A PHONE");
+        System.out.println("\nREMOVE A PHONE");
         do {
             showList();
             brand = readString(">>> Brand: ");
             model = readString(">>> Model: ");
 
-            boolean successfulDeletion = list.delete(list.getElement(new PhoneList(brand, model)));
+            boolean successfulDeletion = list.delete(list.getElement(new Phone(brand, model)));
             System.out.println(successfulDeletion ? ("\n- " + model + " has been deleted") :
                     ("\n- " + model + " has not been deleted"));
 
-            System.out.print("\nDo you want to delete another phone? <y/n>: ");
+            System.out.print("\nDo you want to remove another phone? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of deletePhone method
+    } // end of removePhone method
 
-    public void viewPhone() {
+    /**
+     * Method that searches and displays an element in an array
+     */
+    public void findPhone() {
         String brand, model;
 
-        System.out.println("\nVIEW PHONE DETAILS");
+        System.out.println("\nFIND A PHONE");
         do {
             brand = readString(">>> Brand: ");
             model = readString(">>> Model: ");
 
-            PhoneList phone = (PhoneList) list.getElement(new PhoneList(brand, model));
+            Phone phone = (Phone) list.getElement(new Phone(brand, model));
 
             int index = list.search(phone);
             if (index != -1) {
@@ -94,35 +108,46 @@ public class MyFixedSizeArrayListExecutable {
                 System.out.println("=====================");
                 System.out.println(phone.displayDetails());
             }
-            System.out.print("Do you want to find another product? <y/n>: ");
+            System.out.print("Do you want to find another phone? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of viewPhone method
+    } // end of findPhone method
 
+    /**
+     * Method that reads the input of the user
+     * @param promptMessage message to be shown to the user
+     * @return input of the user of type String
+     */
     public String readString(String promptMessage) {
         System.out.print(promptMessage);
         return keyboard.nextLine();
     } // end of readString method
 
+    /**
+     * Method that displays the menu
+     */
     public void menu() {
-        System.out.println("=====================================");
-        System.out.println("|             MAIN MENU             |");
-        System.out.println("|   -----------------------------   |");
-        System.out.println("|     1. Add phone to list          |");
-        System.out.println("|     2. Delete phone from list     |");
-        System.out.println("|     3. View phone details         |");
-        System.out.println("|     4. View list                  |");
-        System.out.println("|     5. Exit program               |");
-        System.out.println("=====================================");
+        System.out.println("=========================================");
+        System.out.println("|         Mobile Phone Inventory        |");
+        System.out.println("|   ---------------------------------   |");
+        System.out.println("|     1. Add a phone to the list        |");
+        System.out.println("|     2. Remove a phone from the list   |");
+        System.out.println("|     3. Find a phone from the list     |");
+        System.out.println("|     4. View list of phones            |");
+        System.out.println("|     5. Exit program                   |");
+        System.out.println("=========================================");
     } // end of menu method
 
+    /**
+     * Method that displays the array
+     */
     public void showList() {
         System.out.println("\n-------------------------------------------");
-        System.out.println("                Phone List                 ");
+        System.out.println("             Mobile Phone List             ");
         System.out.println("-------------------------------------------");
         System.out.printf("%-13s%-13s%-10s%-10s%n", "Brand", "Model", "Color", "Storage");
         System.out.printf("%-13s%-13s%-10s%-10s%n", "==========", "==========", "=======", "=======");
         for (int index = 0; index < list.getSize(); index++) {
-            PhoneList element = (PhoneList) list.getElement(index);
+            Phone element = (Phone) list.getElement(index);
             if (element != null) {
                 System.out.printf("%-13s%-13s%-10s%-10s%n", element.getBrand(), element.getModel(),
                         element.getColor(), element.getStorage());
@@ -134,20 +159,20 @@ public class MyFixedSizeArrayListExecutable {
     /**
      * This class holds the details of a phone such as the brand, model, color, and storage space
      */
-    private static class PhoneList {
+    private static class Phone {
         private final String brand;
         private final String model;
         private String color;
         private String storage;
 
-        public PhoneList(String b, String m, String c, String s) {
+        public Phone(String b, String m, String c, String s) {
             brand = b;
             model = m;
             color = c;
             storage = s;
         } // end of constructor
 
-        public PhoneList(String b, String m) {
+        public Phone(String b, String m) {
             brand = b;
             model = m;
         } // end of constructor
@@ -168,6 +193,10 @@ public class MyFixedSizeArrayListExecutable {
             return storage;
         }
 
+        /**
+         * Method that displays the details of an element in an array
+         * @return element details condensed in a String
+         */
         public String displayDetails() {
             return "Brand: " + this.getBrand() + "\n" +
                     "Model: " + this.getModel() + "\n" +
@@ -175,9 +204,13 @@ public class MyFixedSizeArrayListExecutable {
                     "Storage: " + this.getStorage() + "\n";
         } // end of displayDetails method
 
+        /**
+         * Override method used for comparing between two objects of the same type
+         * @return csv type format of the chosen variables of an element
+         */
         @Override
         public String toString() {
             return brand + "," + model;
         } // end of toString method
-    } // end of PhoneList class
-} // end of ExecutableOne class
+    } // end of Phone class
+} // end of MyFixedSizeArrayListExecutable class

@@ -25,15 +25,18 @@ public class MyGrowingArrayListExecutable {
         }
     } // end of main method
 
+    /**
+     * Method that directs the program to a specific operation
+     */
     public void run() {
         int selection = 0;
         while (selection != 5) {
             menu();
             selection = Integer.parseInt(readString("Enter among the choices above: "));
             switch (selection) {
-                case 1 -> addTask();
-                case 2 -> deleteTask();
-                case 3 -> viewTask();
+                case 1 -> addProject();
+                case 2 -> removeProject();
+                case 3 -> findProject();
                 case 4 -> showList();
             }
         }
@@ -41,7 +44,10 @@ public class MyGrowingArrayListExecutable {
         System.exit(0);
     } // end of run method
 
-    public void addTask() {
+    /**
+     * Method that adds a project to an array
+     */
+    public void addProject() {
         String course, projectName, dateAssigned, dateSubmitted;
 
         System.out.println("\nADD A PROJECT");
@@ -51,38 +57,44 @@ public class MyGrowingArrayListExecutable {
             dateAssigned = readString(">>> Enter date assigned: ");
             dateSubmitted = readString(">>> Enter date submitted: ");
 
-            list.insert(new ProjectList(course, projectName, dateAssigned, dateSubmitted));
+            list.insert(new Project(course, projectName, dateAssigned, dateSubmitted));
 
             System.out.print("\nDo you want to add another project? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of addTask method
+    } // end of addProject method
 
-    public void deleteTask() {
+    /**
+     * Method that removes a project in an array
+     */
+    public void removeProject() {
         String course, projectName;
 
-        System.out.println("\nDELETE A PROJECT");
+        System.out.println("\nREMOVE A PROJECT");
         do {
             showList();
             course = readString(">>> Course: ");
             projectName = readString(">>> Project name: ");
 
-            boolean successfulDeletion = list.delete(list.getElement(new ProjectList(course, projectName)));
+            boolean successfulDeletion = list.delete(list.getElement(new Project(course, projectName)));
             System.out.println(successfulDeletion ? ("\n- " + projectName + " has been deleted") :
                     ("\n- " + projectName + " has not been deleted"));
 
-            System.out.print("\nDo you want to delete another project? <y/n>: ");
+            System.out.print("\nDo you want to remove another project? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of deleteTask method
+    } // end of removeProject method
 
-    public void viewTask() {
+    /**
+     * Method that searches and displays an element in an array
+     */
+    public void findProject() {
         String course, projectName;
 
-        System.out.println("\nVIEW PROJECT DETAILS");
+        System.out.println("\nFIND A PROJECT");
         do {
             course = readString(">>> Course: ");
             projectName = readString(">>> Project name: ");
 
-            ProjectList project = (ProjectList) list.getElement(new ProjectList(course, projectName));
+            Project project = (Project) list.getElement(new Project(course, projectName));
 
             int index = list.search(project);
             if (index != -1) {
@@ -93,33 +105,44 @@ public class MyGrowingArrayListExecutable {
             }
             System.out.print("Do you want to find another project? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
-    } // end of viewTask method
+    } // end of findProject method
 
+    /**
+     * Method that reads the input of the user
+     * @param promptMessage message to be shown to the user
+     * @return input of the user of type String
+     */
     public String readString(String promptMessage) {
         System.out.print(promptMessage);
         return keyboard.nextLine();
     } // end of readString method
 
+    /**
+     * Method that displays the menu
+     */
     public void menu() {
-        System.out.println("=======================================");
-        System.out.println("|              MAIN MENU              |");
-        System.out.println("|   -------------------------------   |");
-        System.out.println("|     1. Add project to list          |");
-        System.out.println("|     2. Delete project from list     |");
-        System.out.println("|     3. View project details         |");
-        System.out.println("|     4. View list                    |");
-        System.out.println("|     5. Exit program                 |");
-        System.out.println("=======================================");
+        System.out.println("=============================================");
+        System.out.println("|             Project Checklist             |");
+        System.out.println("|   -------------------------------------   |");
+        System.out.println("|     1. Add a project to the list          |");
+        System.out.println("|     2. Remove a project from the list     |");
+        System.out.println("|     3. Find a project                     |");
+        System.out.println("|     4. View project checklist             |");
+        System.out.println("|     5. Exit program                       |");
+        System.out.println("=============================================");
     } // end of menu method
 
+    /**
+     * Method that displays the array
+     */
     public void showList() {
         System.out.println("\n------------------------------------------------------------------");
-        System.out.println("                          Project List                            ");
+        System.out.println("                        Project Checklist                         ");
         System.out.println("------------------------------------------------------------------");
         System.out.printf("%-11s%-25s%-16s%-17s%n", "Course", "Project", "Date Assigned", "Date Submitted");
         System.out.printf("%-11s%-25s%-16s%-17s%n", "========", "======================", "=============", "==============");
         for (int index = 0; index < list.getSize(); index++) {
-            ProjectList element = (ProjectList) list.getElement(index);
+            Project element = (Project) list.getElement(index);
             if (element != null) {
                 System.out.printf("%-11s%-25s%-16s%-17s%n", element.getCourse(), element.getProjectName(),
                         element.getDateAssigned(), element.getDateSubmitted());
@@ -132,20 +155,20 @@ public class MyGrowingArrayListExecutable {
      * This class holds the details of a school project such as the course, project name, date assigned, and
      * date submitted
      */
-    private static class ProjectList {
+    private static class Project {
         private final String course;
         private final String projectName;
         private String dateAssigned;
         private String dateSubmitted;
 
-        public ProjectList(String c, String pN, String dA, String dB) {
+        public Project(String c, String pN, String dA, String dB) {
             course = c;
             projectName = pN;
             dateAssigned = dA;
             dateSubmitted = dB;
         } // end of constructor
 
-        public ProjectList(String c, String pN) {
+        public Project(String c, String pN) {
             course = c;
             projectName = pN;
         } // end of constructor
@@ -166,6 +189,10 @@ public class MyGrowingArrayListExecutable {
             return dateSubmitted;
         }
 
+        /**
+         * Method that displays the details of an element in an array
+         * @return element details condensed in a String
+         */
         public String displayDetails() {
             return "Course: " + this.getCourse() + "\n" +
                     "Project Name: " + this.getProjectName() + "\n" +
@@ -173,9 +200,13 @@ public class MyGrowingArrayListExecutable {
                     "Date Submitted: " + this.getDateSubmitted() + "\n";
         } // end of displayDetails
 
+        /**
+         * Override method used for comparing between two objects of the same type
+         * @return csv type format of the chosen variables of an element
+         */
         @Override
         public String toString() {
             return course + "," + projectName;
         } // end of toString method
-    } // end of ProjectList class
+    } // end of Project class
 } // end of MyGrowingArrayListExecutable class
