@@ -51,7 +51,7 @@ public class MySinglyLinkedListExecutable {
             lastName = readString(">>> Enter last name: ");
             IDNumber = readString(">>> Enter ID number: ");
 
-            singlyList.insertAtHead(new StudentList(firstName, lastName, IDNumber));
+            singlyList.insert(new StudentList(firstName, lastName, IDNumber));
 
             System.out.print("\nDo you want to add another student? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
@@ -66,7 +66,7 @@ public class MySinglyLinkedListExecutable {
             firstName = readString(">>> First name: ");
             lastName = readString(">>> Last name: ");
 
-            boolean successfulDeletion = singlyList.deleteAtHead(singlyList.getElement(new StudentList(firstName, lastName)));
+            boolean successfulDeletion = singlyList.delete(singlyList.getElement(new StudentList(firstName, lastName)));
             System.out.println(successfulDeletion ? ("\n- " + firstName + " has been removed") :
                     ("\n- " + firstName + " has not been removed"));
 
@@ -84,7 +84,7 @@ public class MySinglyLinkedListExecutable {
 
             StudentList student = singlyList.getElement(new StudentList(firstName, lastName));
 
-            int index = singlyList.searchAtHead(student);
+            int index = singlyList.search(student);
             if (index != -1) {
                 System.out.println("\n- found a match at position " + (index + 1) + " from the list");
                 System.out.println("\nDetails");

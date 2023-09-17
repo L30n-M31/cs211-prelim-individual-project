@@ -5,12 +5,12 @@
 
 package prelim.implementations;
 
-import prelim.misc.MyLinkedList;
+import prelim.misc.MyList;
 import prelim.misc.Node;
 
 import java.util.NoSuchElementException;
 
-public class MySinglyLinkedList<T> implements MyLinkedList<T> {
+public class MySinglyLinkedList<T> implements MyList<T> {
     private Node<T> next;
     private int size = 0;
 
@@ -20,7 +20,7 @@ public class MySinglyLinkedList<T> implements MyLinkedList<T> {
     } // end of getSize method
 
     @Override
-    public void insertAtHead(T data) {
+    public void insert(T data) {
         Node<T> newNode = new Node<>(data);
         if (next == null)
             next = newNode;
@@ -31,7 +31,7 @@ public class MySinglyLinkedList<T> implements MyLinkedList<T> {
             currentPointer.setNext(newNode);
         }
         size++;
-    } // end of insertAtHead method
+    } // end of insert method
 
     @Override
     public T getElement(T data) throws NoSuchElementException {
@@ -44,7 +44,6 @@ public class MySinglyLinkedList<T> implements MyLinkedList<T> {
         throw new NoSuchElementException();
     } // end of getElement method
 
-    @Override
     public T getElement(int index) throws NoSuchElementException {
         Node<T> currentPointer = next;
         for (int i = 0; i < getSize(); i++) {
@@ -56,7 +55,8 @@ public class MySinglyLinkedList<T> implements MyLinkedList<T> {
     } // end of getElement method
 
     @Override
-    public boolean deleteAtHead(T data) {
+    public boolean delete(T data) {
+
         Node<T> currentPointer = next;
         Node<T> previousPointer = next;
         for (int i = 0; i < getSize(); i++) {
@@ -74,10 +74,10 @@ public class MySinglyLinkedList<T> implements MyLinkedList<T> {
             currentPointer = currentPointer.getNext();
         }
         return false;
-    } // end of deleteAtHead method
+    } // end of delete method
 
     @Override
-    public int searchAtHead(T data) {
+    public int search(T data) {
         Node<T> currentPointer = next;
         for (int i = 0; i < getSize(); i++) {
             if (currentPointer.getData().equals(data))
@@ -85,18 +85,5 @@ public class MySinglyLinkedList<T> implements MyLinkedList<T> {
             currentPointer = currentPointer.getNext();
         }
         return -1;
-    } // end of searchAtHead method
-
-    @Override
-    public void insertAtTail(T data) { } // end of insertAtTail method
-
-    @Override
-    public boolean deleteAtTail(T data) {
-        return false;
-    } // end of deleteAtTail method
-
-    @Override
-    public int searchAtTail(T data) {
-        return 0;
-    } // end of searchAtTail method
+    } // end of search method
 } // end of MySinglyLinkedList class
