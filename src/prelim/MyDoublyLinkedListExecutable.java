@@ -1,3 +1,8 @@
+/**
+ * @author Leonhard Leung
+ * Date: 09/17/2023
+ */
+
 package prelim;
 
 import prelim.implementations.MyDoublyLinkedList;
@@ -22,6 +27,9 @@ public class MyDoublyLinkedListExecutable {
         }
     } // end of main method
 
+    /**
+     * Method that directs the program to a specific operation
+     */
     public void run() {
         int selection = 0;
         while (selection != 5) {
@@ -38,6 +46,9 @@ public class MyDoublyLinkedListExecutable {
         System.exit(0);
     } // end of run method
 
+    /**
+     * Method that adds a book to a list
+     */
     public void addBook() {
         String borrower, dateBorrowed, bookTitle, bookAuthor, ISBN;
 
@@ -55,6 +66,9 @@ public class MyDoublyLinkedListExecutable {
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of addBook method
 
+    /**
+     * Method that removes a book in a list
+     */
     public void removeBook() {
         String bookTitle, bookAuthor;
 
@@ -72,6 +86,9 @@ public class MyDoublyLinkedListExecutable {
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of removeBook method
 
+    /**
+     * Method that searches and displays an element in the list
+     */
     public void findBook() {
         String bookTitle, bookAuthor;
 
@@ -93,11 +110,19 @@ public class MyDoublyLinkedListExecutable {
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
     } // end of findBook method
 
+    /**
+     * Method that reads the input of the user
+     * @param promptMessage message to be shown to the user
+     * @return input of the user of type String
+     */
     public String readString(String promptMessage) {
         System.out.print(promptMessage);
         return keyboard.nextLine();
     } // end of readString method
 
+    /**
+     * Method that displays the menu
+     */
     public void menu() {
         System.out.println("==========================================");
         System.out.println("|        Library Borrowing System        |");
@@ -110,11 +135,15 @@ public class MyDoublyLinkedListExecutable {
         System.out.println("==========================================");
     } // end of menu method
 
+    /**
+     * Method that displays the list
+     * @param trigger triggers the additional code of the method wherein it asks what order the list will be displayed
+     */
     public void showList(boolean trigger) {
         boolean displayLatestFirst = false;
         Node<Book> bookList = doublyList.getLastNode(false);
         if (trigger) {
-            displayLatestFirst = (readString("\n>>> Display from latest borrowed book? <y/n>: ")
+            displayLatestFirst = (readString("\n>>> Display from recent to oldest? <y/n>: ")
                     .equalsIgnoreCase("y"));
             bookList = doublyList.getLastNode(displayLatestFirst);
         }
@@ -182,6 +211,10 @@ public class MyDoublyLinkedListExecutable {
             return ISBN;
         }
 
+        /**
+         * Method that displays the details of an element in a list
+         * @return element details condensed in a String
+         */
         public String displayDetails() {
             return "Borrower: " + this.getBorrower() + "\n" +
                     "Date borrowed: " + this.getDateBorrowed() + "\n" +
@@ -190,6 +223,10 @@ public class MyDoublyLinkedListExecutable {
                     "ISBN: " + this.getISBN() + "\n";
         } // end of displayDetails method
 
+        /**
+         * Override method used for comparing between two objects of the same type
+         * @return csv type format of the chosen variables of an element
+         */
         @Override
         public String toString() {
             return title + "," + author;

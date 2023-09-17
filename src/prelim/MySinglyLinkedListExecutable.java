@@ -84,7 +84,7 @@ public class MySinglyLinkedListExecutable {
     } // end of removeStudent method
 
     /**
-     * Method that searches and displays the element in a list
+     * Method that searches and displays an element in the list
      */
     public void findStudent() {
         String firstName, lastName;
@@ -189,8 +189,8 @@ public class MySinglyLinkedListExecutable {
         } // end of displayDetails method
 
         /**
-         * Override method that returns a string to be used for comparing data
-         * @return csv type format of chosen variables of an element
+         * Override method used for comparing between two objects of the same type
+         * @return csv type format of the chosen variables of an element
          */
         @Override
         public String toString() {
