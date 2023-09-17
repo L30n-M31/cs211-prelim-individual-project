@@ -22,17 +22,18 @@ This project contains my implementation of a linked list collection as part of m
 
 ## Task Checklist
 - [x] `MyList.java` : Interface definition
-- [x] `ListOverflowException` : User-defined custom exception
+- [x] `ListOverflowException.java` : User-defined custom exception
+- [x] `Node.java` : Template of a node
 - [x] `MyFixedSizeArrayList.java` : Implementation using fixed-size array
 - [x] `MyGrowingArrayList.java` : Implementation using a growing array
 - [x] `MySinglyLinkedList.java` : Implementation using singly-linked nodes
-- [ ] `MyDoubleLinkedList.java` : Implementation using doubly-linked nodes
+- [x] `MyDoublyLinkedList.java` : Implementation using doubly-linked nodes
 - [ ] `MySinglyLinkedCircularList.java` : Implementation using singly-linked circular nodes
 - [ ] `MyDoublyLinkedCircularList.java` : Implementation using double-linked circular nodes
 - [x] `MyFixedSizeArrayListExecutable.java` : Executable for the fixed array list
 - [x] `MyGrowingArrayListExecutable.java` : Executable for the growing array list
 - [x] `MySinglyLinkedListExecutable.java` : Executable for the singly linked list
-- [ ] `ExecutableFour.java` : Executable for number four
+- [x] `MyDoublyLinkedListExecutable.java` : Executable for the doubly linked list
 - [ ] `ExecutableFive.java` : Executable for number five
 - [ ] `ExecutableSix.java` Executable for number six
 
