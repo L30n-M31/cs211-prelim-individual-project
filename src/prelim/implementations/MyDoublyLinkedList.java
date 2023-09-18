@@ -35,9 +35,9 @@ public class MyDoublyLinkedList<T> implements MyList<T> {
         }
         else {
             Node<T> currentPointer = next;
-            while (currentPointer.getNext() != null) {
+            while (currentPointer.getNext() != null)
                 currentPointer = currentPointer.getNext();
-            }
+
             currentPointer.setNext(newNode);
             newNode.setPrevious(currentPointer);
         }
@@ -69,16 +69,17 @@ public class MyDoublyLinkedList<T> implements MyList<T> {
     @Override
     public boolean delete(T data) {
         Node<T> currentPointer = next;
-        Node<T> previousPointer = next;
-        for (int i = 0; i < getSize(); i++) {
-            if (i == 0 && currentPointer.getData().equals(data)) {
-                next = currentPointer.getNext();
-                size--;
-                return true;
-            }
+        Node<T> previousPointer = null;
+
+        while (currentPointer != null) {
             if (currentPointer.getData().equals(data)) {
-                previousPointer.setNext(currentPointer.getNext());
-                //currentPointer.getNext().setPrevious(previousPointer);
+                if (currentPointer == next)
+                    next = currentPointer.getNext();
+                else {
+                    previousPointer.setNext(currentPointer.getNext());
+                    if (currentPointer.getNext() != null)
+                        currentPointer.getNext().setPrevious(previousPointer);
+                }
                 size--;
                 return true;
             }
