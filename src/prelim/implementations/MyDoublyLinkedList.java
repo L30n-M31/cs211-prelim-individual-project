@@ -118,5 +118,5 @@ public class MyDoublyLinkedList<T> implements MyList<T> {
             }
         }
         return current;
-    } // end of display method
+    } // end of getLastNode method
 } // end of MyDoublyLinkedList<T> class
