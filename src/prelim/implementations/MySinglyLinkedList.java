@@ -83,14 +83,13 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     public boolean delete(T data) {
         Node<T> currentPointer = next;
         Node<T> previousPointer = next;
-        for (int i = 0; i < getSize(); i++) {
-            if (i == 0 && currentPointer.getData().equals(data)) {
-                next = currentPointer.getNext();
-                size--;
-                return true;
-            }
+
+        while (currentPointer != null) {
             if (currentPointer.getData().equals(data)) {
-                previousPointer.setNext(currentPointer.getNext());
+                if (currentPointer == next)
+                    next = currentPointer.getNext();
+                else
+                    previousPointer.setNext(currentPointer.getNext());
                 size--;
                 return true;
             }
