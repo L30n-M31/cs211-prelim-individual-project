@@ -28,13 +28,13 @@ This project contains my implementation of a linked list collection as part of m
 - [x] `MyGrowingArrayList.java` : Implementation using a growing array
 - [x] `MySinglyLinkedList.java` : Implementation using singly-linked nodes
 - [x] `MyDoublyLinkedList.java` : Implementation using doubly-linked nodes
-- [ ] `MySinglyLinkedCircularList.java` : Implementation using singly-linked circular nodes
+- [x] `MySinglyLinkedCircularList.java` : Implementation using singly-linked circular nodes
 - [ ] `MyDoublyLinkedCircularList.java` : Implementation using double-linked circular nodes
-- [x] `MyFixedSizeArrayListExecutable.java` : Executable for the fixed array list
+- [x] `MyFixedSizeArrayListExecutable.java` : Executable for the fixed-size array list
 - [x] `MyGrowingArrayListExecutable.java` : Executable for the growing array list
-- [x] `MySinglyLinkedListExecutable.java` : Executable for the singly linked list
-- [x] `MyDoublyLinkedListExecutable.java` : Executable for the doubly linked list
-- [ ] `ExecutableFive.java` : Executable for number five
+- [x] `MySinglyLinkedListExecutable.java` : Executable for the singly-linked list
+- [x] `MyDoublyLinkedListExecutable.java` : Executable for the doubly-linked list
+- [x] `MySinglyLinkedCircularListExecutable.java` : Executable for the singly-linked circular list
 - [ ] `ExecutableSix.java` Executable for number six
 
 ## Deliverables
