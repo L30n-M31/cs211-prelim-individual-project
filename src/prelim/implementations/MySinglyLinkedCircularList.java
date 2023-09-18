@@ -52,28 +52,29 @@ public class MySinglyLinkedCircularList<T> implements MyList<T> {
     @Override
     public T getElement(T data) throws NoSuchElementException {
         Node<T> currentPointer = next;
-        while (!currentPointer.getData().toString().equalsIgnoreCase(data.toString()))
+        do {
+            if (currentPointer.getData().toString().equalsIgnoreCase(data.toString()))
+                return currentPointer.getData();
             currentPointer = currentPointer.getNext();
-        if (currentPointer.getNext() == next)
-            throw new NoSuchElementException();
-        return currentPointer.getData();
+        } while (currentPointer != next);
+        throw new NoSuchElementException();
     } // end of getElement method
 
     /**
-     * !!!TO BE ENHANCED!!!
-     * @param index
-     * @return
-     * @throws NoSuchElementException
+     * Method for obtaining an element in a list (alternative to the override method)
+     * @param index position of the element in the list
+     * @return object that matches the position of the given index in the parameter
+     * @throws NoSuchElementException thrown when no such element is found on the list
      */
     public T getElement(int index) throws NoSuchElementException {
         Node<T> currentPointer = next;
-
-        for (int i = 0; i < getSize(); i++) {
-            if (i == index)
-                return currentPointer.getData();
+        for (int i = 0; i < index; i++) {
             currentPointer = currentPointer.getNext();
         }
-        throw new NoSuchElementException();
+        if (currentPointer == null)
+            throw new NoSuchElementException();
+
+        return currentPointer.getData();
     } // end of getElement method
 
     /**
@@ -84,23 +85,29 @@ public class MySinglyLinkedCircularList<T> implements MyList<T> {
     @Override
     public boolean delete(T data) {
         Node<T> currentPointer = next;
-        Node<T> previousPointer = next;
-        for (int i = 0; i < getSize(); i++) {
-            if (i == 0 && currentPointer.getData().equals(data)) {
-                next = currentPointer.getNext();
-                size--;
-                return true;
-            }
+        Node<T> previousPointer = null;
+
+        do {
             if (currentPointer.getData().equals(data)) {
-                previousPointer.setNext(currentPointer.getNext());
-                if (currentPointer.getNext() == next)
-                    previousPointer.setNext(next);
+                if (previousPointer == null) {
+                    if (currentPointer.getNext() == next)
+                        next = null;
+                    else {
+                        next = currentPointer.getNext();
+                        Node<T> lastNode = next;
+                        while (lastNode.getNext() != currentPointer)
+                            lastNode = lastNode.getNext();
+                        lastNode.setNext(next);
+                    }
+                } else {
+                    previousPointer.setNext(currentPointer.getNext());
+                }
                 size--;
                 return true;
             }
             previousPointer = currentPointer;
             currentPointer = currentPointer.getNext();
-        }
+        } while (currentPointer != next);
         return false;
     } // end of delete method
 
@@ -113,11 +120,12 @@ public class MySinglyLinkedCircularList<T> implements MyList<T> {
     public int search(T data) {
         int position = 0;
         Node<T> currentPointer = next;
-        while (currentPointer.getNext() != next) {
+        do {
             if (currentPointer.getData().equals(data))
                 return position;
             currentPointer = currentPointer.getNext();
-        }
+            position++;
+        } while (currentPointer != next);
         return -1;
     } // end of search method
 } // end of MySinglyLinkedCircularList class
