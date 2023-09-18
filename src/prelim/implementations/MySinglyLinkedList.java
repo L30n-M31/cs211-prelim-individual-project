@@ -82,7 +82,7 @@ public class MySinglyLinkedList<T> implements MyList<T> {
     @Override
     public boolean delete(T data) {
         Node<T> currentPointer = next;
-        Node<T> previousPointer = next;
+        Node<T> previousPointer = null;
 
         while (currentPointer != null) {
             if (currentPointer.getData().equals(data)) {
