@@ -220,11 +220,8 @@ public class MyFixedSizeArrayListExecutable {
 
             Phone phone = (Phone) obj;
 
-            if ((this.getBrand() + "," + this.getModel()).equalsIgnoreCase
-                    (phone.getBrand() + "," + this.getModel()))
-                return true;
-
-            return false;
-        }
+            return (this.getBrand() + "," + this.getModel()).equalsIgnoreCase
+                    (phone.getBrand() + "," + this.getModel());
+        } // end of equals method
     } // end of Phone class
 } // end of MyFixedSizeArrayListExecutable class
