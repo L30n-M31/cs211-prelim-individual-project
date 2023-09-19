@@ -104,7 +104,7 @@ public class MyDoublyLinkedListExecutable {
                 System.out.println("\n- found a match at position " + (index + 1) + " from the list");
                 System.out.println("\nDetails");
                 System.out.println("============================");
-                System.out.println(book.displayDetails());
+                System.out.println(book.toString());
             }
             System.out.print("Do you want to find another book? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
@@ -212,24 +212,34 @@ public class MyDoublyLinkedListExecutable {
         }
 
         /**
-         * Method that displays the details of an element in a list
-         * @return element details condensed in a String
+         * Override method used to display the details of an element in a list
+         * @return detailed information of an element
          */
-        public String displayDetails() {
+        @Override
+        public String toString() {
             return "Borrower: " + this.getBorrower() + "\n" +
                     "Date borrowed: " + this.getDateBorrowed() + "\n" +
                     "Title: " + this.getTitle() + "\n" +
                     "Author: " + this.getAuthor() + "\n" +
                     "ISBN: " + this.getISBN() + "\n";
-        } // end of displayDetails method
+        } // end of toString method
 
         /**
-         * Override method used for comparing between two objects of the same type
-         * @return csv type format of the chosen variables of an element
+         * Override method used to compare two objects of the same data type
+         * @param obj object of any type
+         * @return boolean value regarding comparison of two objects
          */
-        @Override
-        public String toString() {
-            return title + "," + author;
-        } // end of toString method
+        public boolean equals(Object obj) {
+            if (obj == this)
+                return true;
+
+            if (!(obj instanceof Book))
+                return false;
+
+            Book book = (Book) obj;
+
+            return (this.getTitle() + "," + this.getAuthor()).equalsIgnoreCase
+                    (book.getTitle() + "," + book.getAuthor());
+        } // end of equals method
     } // end of Book class
 } // end of MyDoublyLinkedListExecutable class

@@ -54,7 +54,7 @@ public class MyDoublyLinkedList<T> implements MyList<T> {
     public T getElement(T data) throws NoSuchElementException {
         Node<T> currentPointer = next;
         for (int i = 0; i < getSize(); i++) {
-            if (currentPointer.getData().toString().equalsIgnoreCase(data.toString()))
+            if (currentPointer.getData().equals(data))
                 return currentPointer.getData();
             currentPointer = currentPointer.getNext();
         }
