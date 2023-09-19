@@ -31,8 +31,7 @@ public class MyDoublyLinkedList<T> implements MyList<T> {
         Node<T> newNode = new Node<>(data);
         if (next == null) {
             next = newNode;
-        }
-        else {
+        } else {
             Node<T> currentPointer = next;
             while (currentPointer.getNext() != null)
                 currentPointer = currentPointer.getNext();

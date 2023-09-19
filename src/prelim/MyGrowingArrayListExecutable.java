@@ -1,6 +1,6 @@
 /**
  * @author Leung Leonhard
- * Date: 09/16/2023 (updated)
+ * Date: 09/16/2023
  */
 
 package prelim;
@@ -145,6 +145,8 @@ public class MyGrowingArrayListExecutable {
             if (element != null) {
                 System.out.printf("%-11s%-25s%-16s%-17s%n", element.getCourse(), element.getProjectName(),
                         element.getDateAssigned(), element.getDateSubmitted());
+            } else {
+                System.out.printf("%-11s%-25s%-16s%-17s%n", "N/A", "N/A", "N/A", "N/A");
             }
         }
         System.out.println("------------------------------------------------------------------\n");
@@ -200,6 +202,12 @@ public class MyGrowingArrayListExecutable {
                     "Date Submitted: " + this.getDateSubmitted() + "\n";
         } // end of toString method
 
+        /**
+         * Override method used to compare two objects of the same data type
+         * @param obj object of any type
+         * @return boolean value regarding comparison of two objects
+         */
+        @Override
         public boolean equals(Object obj) {
             if (obj == this)
                 return true;

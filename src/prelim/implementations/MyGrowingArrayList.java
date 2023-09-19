@@ -1,6 +1,6 @@
 /**
  * @author Leonhard Leung
- * Date: 09/16/2023 (updated)
+ * Date: 09/16/2023
  */
 
 package prelim.implementations;
@@ -67,11 +67,17 @@ public class MyGrowingArrayList implements MyList<Object> {
     @Override
     public boolean delete(Object data) {
         for (int i = 0; i < list.length; i++) {
-            if (list[i] != null)
-                if (list[i].equals(data)) {
-                    list[i] = null;
-                    return true;
+            if (list[i] != null && list[i].equals(data)) {
+                list[i] = null;
+
+                for (int j = i + 1; j < list.length; j++) {
+                    if (list[j] != null) {
+                        list[j - 1] = list[j];
+                        list[j] = null;
+                    }
                 }
+                return true;
+            }
         }
         return false;
     } // end of delete method

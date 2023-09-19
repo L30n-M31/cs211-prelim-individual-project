@@ -126,7 +126,7 @@ public class MyDoublyLinkedCircularListExecutable {
         Song element = playlist.getData();
 
         System.out.println("\nNow playing");
-        System.out.printf("\t%-18s%-20s%-18s%-5s%n", element.getTitle(), element.getArtist(), element.getAlbum(),
+        System.out.printf("\t%-40s%-40s%-40s%-13s%n", element.getTitle(), element.getArtist(), element.getAlbum(),
                 element.getDuration());
 
         System.out.println("\nNext from playlist");
@@ -138,7 +138,7 @@ public class MyDoublyLinkedCircularListExecutable {
 
             element = playlist.getData();
 
-            System.out.printf("\t%-18s%-20s%-18s%-5s%n", element.getTitle(), element.getArtist(), element.getAlbum(),
+            System.out.printf("\t%-40s%-40s%-40s%-13s%n", element.getTitle(), element.getArtist(), element.getAlbum(),
                     element.getDuration());
         }
         System.out.println();
@@ -159,7 +159,7 @@ public class MyDoublyLinkedCircularListExecutable {
      */
     public void menu() {
         System.out.println("==============================================");
-        System.out.println("|                 My Playlist                |");
+        System.out.println("|                 Harmony Hub                |");
         System.out.println("|   --------------------------------------   |");
         System.out.println("|     1. Add a song to the playlist          |");
         System.out.println("|     2. Remove a song from the playlist     |");
@@ -175,7 +175,7 @@ public class MyDoublyLinkedCircularListExecutable {
      */
     public void subMenu() {
         System.out.println("\n-----------< My Playlist >------------");
-        System.out.println("|   1. Play songs in queue           |");
+        System.out.println("|   1. Play all songs in playlist    |");
         System.out.println("|   2. Play songs with queue limit   |");
         System.out.println("--------------------------------------");
     } // end of subMenu method
@@ -185,19 +185,24 @@ public class MyDoublyLinkedCircularListExecutable {
      */
     public void showPlaylist() {
         Node<Song> playlist = doublyCircularList.getLastNode(false);
-        System.out.println("\n----------------------------------------------------------------------------------");
-        System.out.println("                                   My Playlist                                    ");
-        System.out.println("----------------------------------------------------------------------------------");
-        System.out.printf("%-18s%-20s%-18s%-15s%-13s%n", "Title", "Artist", "Album", "Genre", "Duration");
-        System.out.printf("%-18s%-20s%-18s%-15s%-13s%n", "===============", "==============", "===============",
-                "============", "==========");
+        System.out.println("\n--------------------------------------------------------------------------------------" +
+                "-----------------------------------------------------------");
+        System.out.println("                                                              Harmony Hub Playlist      " +
+                "                                                         ");
+        System.out.println("----------------------------------------------------------------------------------------" +
+                "---------------------------------------------------------");
+        System.out.printf("%-40s%-40s%-40s%-15s%-13s%n", "Title", "Artist", "Album", "Genre", "Duration");
+        System.out.printf("%-40s%-40s%-40s%-15s%-13s%n", "=====================================",
+                "=====================================", "=====================================", "============",
+                "==========");
         for (int index = 0; index < doublyCircularList.getSize(); index++) {
             Song element = playlist.getData();
             playlist = playlist.getNext();
-            System.out.printf("%-18s%-20s%-18s%-15s%-13s%n", element.getTitle(), element.getArtist(),
+            System.out.printf("%-40s%-40s%-40s%-15s%-13s%n", element.getTitle(), element.getArtist(),
                     element.getAlbum(), element.getGenre(), element.getDuration());
         }
-        System.out.println("----------------------------------------------------------------------------------\n");
+        System.out.println("----------------------------------------------------------------------------------------" +
+                "---------------------------------------------------------\n");
     } // end of showPlaylist method
 
     /**

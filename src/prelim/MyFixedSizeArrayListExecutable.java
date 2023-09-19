@@ -1,6 +1,6 @@
 /**
  * @author Leonhard Leung
- * Date: 09/16/2023 (updated)
+ * Date: 09/16/2023
  */
 
 package prelim;
