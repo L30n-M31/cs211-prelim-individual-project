@@ -229,6 +229,7 @@ public class MyDoublyLinkedListExecutable {
          * @param obj object of any type
          * @return boolean value regarding comparison of two objects
          */
+        @Override
         public boolean equals(Object obj) {
             if (obj == this)
                 return true;
