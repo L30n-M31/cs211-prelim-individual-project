@@ -101,7 +101,7 @@ public class MySinglyLinkedListExecutable {
                 System.out.println("\n- found a match at position " + (index + 1) + " from the list");
                 System.out.println("\nDetails");
                 System.out.println("============================");
-                System.out.println(student.displayDetails());
+                System.out.println(student.toString());
             }
             System.out.print("Do you want to find another student? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
@@ -180,21 +180,35 @@ public class MySinglyLinkedListExecutable {
         }
 
         /**
-         * Method that displays the details of an element in a list
-         * @return element details condensed in a String
-         */
-        public String displayDetails() {
-            return "Name: " + this.getFirstName() + " " + this.getLastName() + "\n" +
-                    "ID number: " + this.getIDNumber() + "\n";
-        } // end of displayDetails method
-
-        /**
-         * Override method used for comparing between two objects of the same type
-         * @return csv type format of the chosen variables of an element
+         * Override method used to display the details of an element in a list
+         * @return detailed information of an element
          */
         @Override
         public String toString() {
-            return firstName + "," + lastName;
+            return "Name: " + this.getFirstName() + " " + this.getLastName() + "\n" +
+                    "ID number: " + this.getIDNumber() + "\n";
         } // end of toString method
+
+        /**
+         * Override method used to compare two objects of the same data type
+         * @param obj object of any type
+         * @return boolean value regarding comparison of two objects
+         */
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this)
+                return true;
+
+            if (!(obj instanceof Student)) {
+                return false;
+            }
+
+            Student student = (Student) obj;
+
+            if ((this.getFirstName() + "," + this.getLastName()).equalsIgnoreCase
+                    (student.getFirstName() + "," + student.getLastName()))
+                return true;
+            return false;
+        }
     } // end of Student class
 } // end of MySinglyLinkedListExecutable class
