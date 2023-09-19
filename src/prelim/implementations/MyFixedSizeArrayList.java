@@ -48,7 +48,7 @@ public class MyFixedSizeArrayList implements MyList<Object> {
     public Object getElement(Object data) throws NoSuchElementException {
         for (Object element : list) {
             if (element != null)
-                if (element.toString().equalsIgnoreCase(data.toString()))
+                if (element.equals(data))
                     return element;
         }
         throw new NoSuchElementException();

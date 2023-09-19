@@ -106,7 +106,7 @@ public class MyFixedSizeArrayListExecutable {
                 System.out.println("\n- found a match at position " + (index + 1) + " from the list");
                 System.out.println("\nDetails");
                 System.out.println("=====================");
-                System.out.println(phone.displayDetails());
+                System.out.println(phone.toString());
             }
             System.out.print("Do you want to find another phone? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
@@ -194,23 +194,37 @@ public class MyFixedSizeArrayListExecutable {
         }
 
         /**
-         * Method that displays the details of an element in an array
-         * @return element details condensed in a String
+         * Override method used to display the details of an element in a list
+         * @return detailed information of an element
          */
-        public String displayDetails() {
+        @Override
+        public String toString() {
             return "Brand: " + this.getBrand() + "\n" +
                     "Model: " + this.getModel() + "\n" +
                     "Color: " + this.getColor() + "\n" +
                     "Storage: " + this.getStorage() + "\n";
-        } // end of displayDetails method
+        } // end of toString method
 
         /**
-         * Override method used for comparing between two objects of the same type
-         * @return csv type format of the chosen variables of an element
+         * Override method used to compare two objects of the same data type
+         * @param obj object of any type
+         * @return boolean value regarding comparison of two objects
          */
         @Override
-        public String toString() {
-            return brand + "," + model;
-        } // end of toString method
+        public boolean equals(Object obj) {
+            if (obj == this)
+                return true;
+
+            if (!(obj instanceof Phone))
+                return false;
+
+            Phone phone = (Phone) obj;
+
+            if ((this.getBrand() + "," + this.getModel()).equalsIgnoreCase
+                    (phone.getBrand() + "," + this.getModel()))
+                return true;
+
+            return false;
+        }
     } // end of Phone class
 } // end of MyFixedSizeArrayListExecutable class
