@@ -102,7 +102,7 @@ public class MySinglyLinkedCircularListExecutable {
                 System.out.println("\n- found a match at position " + (index + 1) + " from the list");
                 System.out.println("\nDetails");
                 System.out.println("============================");
-                System.out.println(player.displayDetails());
+                System.out.println(player.toString());
             }
             System.out.print("\nDo you want to find another player? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
@@ -219,24 +219,34 @@ public class MySinglyLinkedCircularListExecutable {
         }
 
         /**
-         * Method that displays the details of an element in a list
-         * @return element details condensed in a String
+         * Override method used to display the details of an element in a list
+         * @return detailed information of an element
          */
-        public String displayDetails() {
+        @Override
+        public String toString() {
             return "Name: " + this.getName() + "\n" +
                     "Age: " + this.getAge() + "\n" +
                     "Nationality: " + this.getNationality() + "\n" +
                     "Height: " + this.getHeight() + "\n" +
                     "Weight: " + this.getWeight() + "\n";
-        } // end of displayDetails method
+        } // end of toString method
 
         /**
-         * Override method used for comparing between two objects of the same type
-         * @return the name of an element
+         * Override method used to compare two objects of the same data type
+         * @param obj object of any type
+         * @return boolean value regarding comparison of two objects
          */
         @Override
-        public String toString() {
-            return name;
-        } // end of toString method
+        public boolean equals(Object obj) {
+            if (obj == this)
+                return true;
+
+            if (!(obj instanceof Player))
+                return false;
+
+            Player player = (Player) obj;
+
+            return this.getName().equalsIgnoreCase(player.getName());
+        } // end of equals method
     } // end of Player class
 } // end of MySinglyLinkedCircularListExecutable

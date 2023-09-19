@@ -53,7 +53,7 @@ public class MySinglyLinkedCircularList<T> implements MyList<T> {
     public T getElement(T data) throws NoSuchElementException {
         Node<T> currentPointer = next;
         do {
-            if (currentPointer.getData().toString().equalsIgnoreCase(data.toString()))
+            if (currentPointer.getData().equals(data))
                 return currentPointer.getData();
             currentPointer = currentPointer.getNext();
         } while (currentPointer != next);
