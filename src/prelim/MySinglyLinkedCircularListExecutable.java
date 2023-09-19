@@ -6,7 +6,6 @@
 package prelim;
 
 import prelim.implementations.MySinglyLinkedCircularList;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -241,10 +240,8 @@ public class MySinglyLinkedCircularListExecutable {
             if (obj == this)
                 return true;
 
-            if (!(obj instanceof Player))
+            if (!(obj instanceof Player player))
                 return false;
-
-            Player player = (Player) obj;
 
             return this.getName().equalsIgnoreCase(player.getName());
         } // end of equals method

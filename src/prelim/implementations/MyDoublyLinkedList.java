@@ -7,7 +7,6 @@ package prelim.implementations;
 
 import prelim.misc.MyList;
 import prelim.misc.Node;
-
 import java.util.NoSuchElementException;
 
 public class MyDoublyLinkedList<T> implements MyList<T> {

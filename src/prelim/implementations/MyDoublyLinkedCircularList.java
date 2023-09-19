@@ -5,7 +5,6 @@
 
 package prelim.implementations;
 
-import prelim.misc.ListOverflowException;
 import prelim.misc.MyList;
 import prelim.misc.Node;
 
@@ -33,8 +32,6 @@ public class MyDoublyLinkedCircularList<T> implements MyList<T> {
         Node<T> newNode = new Node<>(data);
         if (next == null) {
             next = newNode;
-            newNode.setNext(next);
-            next.setPrevious(newNode);
         } else {
             Node<T> currentPointer = next;
             while (currentPointer.getNext() != next)
@@ -42,9 +39,9 @@ public class MyDoublyLinkedCircularList<T> implements MyList<T> {
 
             currentPointer.setNext(newNode);
             newNode.setPrevious(currentPointer);
-            newNode.setNext(next);
-            next.setPrevious(newNode);
         }
+        newNode.setNext(next);
+        next.setPrevious(newNode);
         size++;
     } // end of insert method
 
@@ -58,7 +55,7 @@ public class MyDoublyLinkedCircularList<T> implements MyList<T> {
     public T getElement(T data) throws NoSuchElementException {
         Node<T> currentPointer = next;
         do {
-            if (currentPointer.getData().toString().equalsIgnoreCase(data.toString()))
+            if (currentPointer.getData().equals(data))
                 return currentPointer.getData();
             currentPointer = currentPointer.getNext();
         } while (currentPointer != next);
@@ -103,12 +100,13 @@ public class MyDoublyLinkedCircularList<T> implements MyList<T> {
 
     /**
      * Method for obtaining the position of the element in a list
-     * @param data
-     * @return
+     * @param data details of an object
+     * @return int value that either returns the position of the element or a -1 if no such element is found
      */
     @Override
     public int search(T data) {
-        int position = getSize();
+        // I just searched from the tail going to the head instead to make use of the doubly-linked list
+        int position = getSize() - 1;
         Node<T> currentPointer = next.getPrevious();
         do {
             if (currentPointer.getData().equals(data))

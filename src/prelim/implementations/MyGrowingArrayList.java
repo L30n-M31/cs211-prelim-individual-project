@@ -6,7 +6,6 @@
 package prelim.implementations;
 
 import prelim.misc.MyList;
-
 import java.util.NoSuchElementException;
 
 public class MyGrowingArrayList implements MyList<Object> {

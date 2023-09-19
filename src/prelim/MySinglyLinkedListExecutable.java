@@ -6,12 +6,10 @@
 package prelim;
 
 import prelim.implementations.MySinglyLinkedList;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MySinglyLinkedListExecutable {
-
     private final Scanner keyboard = new Scanner(System.in);
     MySinglyLinkedList<Student> singlyList = new MySinglyLinkedList<>();
 
@@ -199,10 +197,8 @@ public class MySinglyLinkedListExecutable {
             if (obj == this)
                 return true;
 
-            if (!(obj instanceof Student))
+            if (!(obj instanceof Student student))
                 return false;
-
-            Student student = (Student) obj;
 
             return (this.getFirstName() + "," + this.getLastName()).equalsIgnoreCase
                     (student.getFirstName() + "," + student.getLastName());

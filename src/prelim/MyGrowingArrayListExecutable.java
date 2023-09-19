@@ -6,7 +6,6 @@
 package prelim;
 
 import prelim.implementations.MyGrowingArrayList;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -205,10 +204,8 @@ public class MyGrowingArrayListExecutable {
             if (obj == this)
                 return true;
 
-            if (!(obj instanceof Project))
+            if (!(obj instanceof Project project))
                 return false;
-
-            Project project = (Project) obj;
 
             return (this.getCourse() + "," + this.getProjectName()).equalsIgnoreCase(
                     project.getCourse() + "," + project.getProjectName());

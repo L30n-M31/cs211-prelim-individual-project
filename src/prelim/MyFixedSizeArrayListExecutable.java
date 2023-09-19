@@ -7,13 +7,13 @@ package prelim;
 
 import prelim.implementations.MyFixedSizeArrayList;
 import prelim.misc.ListOverflowException;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MyFixedSizeArrayListExecutable {
     private final MyFixedSizeArrayList list = new MyFixedSizeArrayList();
     private final Scanner keyboard = new Scanner(System.in);
+
     public static void main(String[] args) {
         MyFixedSizeArrayListExecutable execute = new MyFixedSizeArrayListExecutable();
         try {
@@ -215,10 +215,8 @@ public class MyFixedSizeArrayListExecutable {
             if (obj == this)
                 return true;
 
-            if (!(obj instanceof Phone))
+            if (!(obj instanceof Phone phone))
                 return false;
-
-            Phone phone = (Phone) obj;
 
             return (this.getBrand() + "," + this.getModel()).equalsIgnoreCase
                     (phone.getBrand() + "," + this.getModel());

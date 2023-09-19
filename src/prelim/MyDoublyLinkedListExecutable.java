@@ -7,12 +7,10 @@ package prelim;
 
 import prelim.implementations.MyDoublyLinkedList;
 import prelim.misc.Node;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MyDoublyLinkedListExecutable {
-
     private final Scanner keyboard = new Scanner(System.in);
     MyDoublyLinkedList<Book> doublyList = new MyDoublyLinkedList<>();
 
@@ -234,10 +232,8 @@ public class MyDoublyLinkedListExecutable {
             if (obj == this)
                 return true;
 
-            if (!(obj instanceof Book))
+            if (!(obj instanceof Book book))
                 return false;
-
-            Book book = (Book) obj;
 
             return (this.getTitle() + "," + this.getAuthor()).equalsIgnoreCase
                     (book.getTitle() + "," + book.getAuthor());
