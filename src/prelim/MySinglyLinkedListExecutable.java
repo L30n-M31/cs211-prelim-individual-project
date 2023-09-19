@@ -199,15 +199,15 @@ public class MySinglyLinkedListExecutable {
             if (obj == this)
                 return true;
 
-            if (!(obj instanceof Student)) {
+            if (!(obj instanceof Student))
                 return false;
-            }
 
             Student student = (Student) obj;
 
             if ((this.getFirstName() + "," + this.getLastName()).equalsIgnoreCase
                     (student.getFirstName() + "," + student.getLastName()))
                 return true;
+
             return false;
         }
     } // end of Student class
