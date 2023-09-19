@@ -204,11 +204,8 @@ public class MySinglyLinkedListExecutable {
 
             Student student = (Student) obj;
 
-            if ((this.getFirstName() + "," + this.getLastName()).equalsIgnoreCase
-                    (student.getFirstName() + "," + student.getLastName()))
-                return true;
-
-            return false;
-        }
+            return (this.getFirstName() + "," + this.getLastName()).equalsIgnoreCase
+                    (student.getFirstName() + "," + student.getLastName());
+        } // end of equals method
     } // end of Student class
 } // end of MySinglyLinkedListExecutable class
