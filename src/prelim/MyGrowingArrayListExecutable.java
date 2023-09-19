@@ -101,7 +101,7 @@ public class MyGrowingArrayListExecutable {
                 System.out.println("\n- found a match at position " + (index + 1) + " from the list");
                 System.out.println("\nDetails");
                 System.out.println("=====================");
-                System.out.println(project.displayDetails());
+                System.out.println(project.toString());
             }
             System.out.print("Do you want to find another project? <y/n>: ");
         } while (keyboard.nextLine().equalsIgnoreCase("y"));
@@ -190,23 +190,28 @@ public class MyGrowingArrayListExecutable {
         }
 
         /**
-         * Method that displays the details of an element in an array
-         * @return element details condensed in a String
+         * Override method used to display the details of an element in a list
+         * @return detailed information of an element
          */
-        public String displayDetails() {
+        @Override
+        public String toString() {
             return "Course: " + this.getCourse() + "\n" +
                     "Project Name: " + this.getProjectName() + "\n" +
                     "Date Assigned: " + this.getDateAssigned() + "\n" +
                     "Date Submitted: " + this.getDateSubmitted() + "\n";
-        } // end of displayDetails
-
-        /**
-         * Override method used for comparing between two objects of the same type
-         * @return csv type format of the chosen variables of an element
-         */
-        @Override
-        public String toString() {
-            return course + "," + projectName;
         } // end of toString method
+
+        public boolean equals(Object obj) {
+            if (obj == this)
+                return true;
+
+            if (!(obj instanceof Project))
+                return false;
+
+            Project project = (Project) obj;
+
+            return (this.getCourse() + "," + this.getProjectName()).equalsIgnoreCase(
+                    project.getCourse() + "," + project.getProjectName());
+        } // end of equals method
     } // end of Project class
 } // end of MyGrowingArrayListExecutable class
